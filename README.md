@@ -1,8 +1,8 @@
-# Knowledge Engineering: Report
+# Knowledge Engineering Report
 
 You can use the [editor on GitHub](https://github.com/MScaramuzzi/test-KE/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
-\tableofcontents
+$\tableofcontents$
 
 ## Abstract
 
