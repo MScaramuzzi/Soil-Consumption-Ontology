@@ -6,18 +6,25 @@ You can use the [editor on GitHub](https://github.com/MScaramuzzi/test-KE/edit/g
 
 Soil consumption is a phenomenon associated with the loss of fundamental environmental assets, due to the artificial occupation of originally natural soil. This issue is being monitored by SNPA (*Sistema Nazionale per la Protezione dell’Ambiente*), and in recent years an ontology was published by ISPRA (*Istituto Superiore per la Protezione e la Ricerca Ambientale*). This work aims to be a refactor of that ontology, although with a different approach to the matter.​
 
-### Introduction
+## 1.Introduction
 
-### Related Work
+## 2.Related Work
 
-## Ontology
+## 3.Ontology
 
-### Design Methodology
+### 3.1 Design Methodology
 
-### Ontology Description
+### 3.2 Ontology Description
 
+## 4. Mapping rules and ontology publication(RML)
 
-### Mapping rules and ontology publication(RML)
+## 5. Ontology alignment(LIMES)
+
+## 6. Usage - SPARQL Queries
+
+## 7. How to use the system
+ 
+## 8. Conclusion and future work
 
 ### Markdown
 
