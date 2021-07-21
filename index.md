@@ -79,13 +79,28 @@ In the following figure we present the knowledge graph that represents classes a
 ​
 <img src="images/KG.png" alt="hi" class="inline"/>
 
+
+The two main classes in this graph are **:Indicator** and **:Place**. These two classes subtend the components we want to focus on our domain: measurements and geographical coordinates.
+
+Starting from the latter of the two, we can see that it was modeled by using the well-known Logical ODP N-Ary relation in order to distinguish the various types of locations. This instantiation of the pattern has four subclasses represented by **:Nazione**, **:Regione**, **:Provincia**, **:Comune**, which are characterized by a hierarchical feature, determined by the Logical ODP **Transitive Reduction**. In particular, it is defined with two properties **:contains** and **:containsDirectly**, the former being transitive.
+
+*A **:PlaceCode** is associated to a **:Place**, and it can be released by any **:Organization** based on the country (ISTAT for Italy), this class was modeled in such a general way in order to make it independent of the country in which the ontology can be deployed on. An important feature of **:Place** is found in its **:Geometry**, which is a broader definition used to describe its geographical features which can vary from latitude and longitude to being a centroid, the specific implementation of this depends on how the **rdfs:Literal** is defined.*
+
+To each **:Place** it is linked one or more :Collection of **:Indicator**. By using the Logical ODP **Property Chain**, if a **:Collection** is defined by a particular **:CollectionMetric**, the same metric is valid for the **:Indicator**, this feature is not meant to be used in our context, it is to generalize the ontology and facilitate its reuse in other domains of interest.(nei contesti di misurazioni???)
+
+**:Indicator** itself is another application of the **N-Ary relation** pattern. The rationale behind this choice is that we needed to model a process that involved many classes at the same time. Any entity of **:Indicator** is provided with a **:atTime** relation, connected to a **:TimeEntity** that could be either an **:Instant** or a time **:Interval**. This design choice was made because we wanted to generalize the concept of time related to a particular indicator. As it was explained in the previous paragraph, an indicator is provided with a **:Metric** that represents the general type of measure an indicator is associated with (could be hectares, percentage, square meters etc.).
+
+The **:hasParameter** relation is necessary to equip an indicator with the particular task it is used for (soil consumption, non-classified soil, inhabitants for hectare etc.), thus enabling to instantiate it to any application of the ontology by whomever aims to reuse it.
+
+Lastly, an indicator has :IndicatorValue, which itself is connected with a **:UnitOfMeasure**. There is a distinction to be made between **:Metric** and **:UnitOfMeasure** the former represents the general metric associated with an indicator, while the latter represents the particular unit of measure of the value which may be  a multiple or a submultiple of the metric associated with the indicator (if **:Metric** is meters, **:UnitOfMeasure** can be centimeter, kilometers etc.). This again, was done in order to provide reusability to the ontology: some applications in very different domains may need different magnitude of a unit of measures.
+
 ## 4. Mapping rules and ontology publication(RML)
 
-## 5. Ontology alignment(LIMES)
+## 5. Deployement on Virtuoso - SPARQL Queries ??
 
-## 6. Usage - SPARQL Queries
+## 6. Ontology alignment(LIMES) ??
 
-## 7. How to use the system
+## 7. How to deploy the system ??
  
 ## 8. Conclusion and future work
 
