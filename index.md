@@ -52,6 +52,13 @@ In the following section we provide the necessary steps we took in order to form
 
 ### 3.1 Design Methodology
 
+*The main technique we used to develop the project was compliant with the norms and requirements of the eXtreme Design methodology.*
+
+*After studying the specific domain of soil consumption, we formulated various Competency Questions (CQs) that helped shape the ontology, followed by the application and usage of Ontology Design Patterns (ODPs) in order to overcome expressivity issues.*
+
+*After testing and adjusting various aspects of the ontology, we were finally able to complete it. Here are some examples of the CQs we used for modeling.*
+
+
 | ID  | Competency Question                  |
 |-----|--------------------------------------|
 | CQ1 | What does an indicator describe?     |
@@ -59,6 +66,11 @@ In the following section we provide the necessary steps we took in order to form
 | CQ3 | What metric describes the indicator? |
 | CQ4 | What is the organization that provided the place's code  |
 | CQ5 | What are  the indicators inside a collection? |
+
+ **Table 1** - *Competency Questions used for modeling the ontology*
+
+*By analyzing these CQs and many others like them, we were able to extrapolate a snapshot of the world that this domain was describing, and we used it to generate our classes in a way that matched to that precise pictures. We tried to represent the semantic connections between the various entities that populate this domain and give them their actual meaning as it was intended.*
+
 
 ### 3.2 Ontology Description
 
