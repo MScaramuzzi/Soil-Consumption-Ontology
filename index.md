@@ -76,6 +76,8 @@ In the following section we provide the necessary steps we took in order to form
 
 In the following figure we present the knowledge graph that represents classes and object properties that define our ontology:
 
+​![Knowledge graph](https://github.com/MScaramuzzi/Soil-Consumption-Ontology/blob/gh-pages/KG.png)
+
 ## 4. Mapping rules and ontology publication(RML)
 
 ## 5. Ontology alignment(LIMES)
@@ -90,7 +92,7 @@ In the following figure we present the knowledge graph that represents classes a
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-​![Knowledge graph](KG.png)
+
 
 ```markdown
 
