@@ -1,6 +1,6 @@
 # Knowledge Engineering Report
 
-You can use the [editor on GitHub](https://github.com/MScaramuzzi/test-KE/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+<div style= "text-align; right"> 
 
 ## Abstract
 
@@ -21,16 +21,16 @@ The speed of land transformation recorded between 2017 and 2018 is maintained, i
 
 In this work we aimed to create an ontology which is inspired by the one that was made by ISPRA. The said ontology makes massive use of many different vocabularies and external ontologies. This leads to the Knowledge Graph, and thus the ontology itself, to be very complex to understand and at times inefficient. Our work, instead, has been focused on achieving **efficiency** by adopting a design strategy that would lead to **simplicity** and conciseness of the ontology.
 
-In this report paper we first briefly touch upon on related work that has been done in this field describing  how ISPRA-CORE is organized (***Section 2***). We then proceed to illustrate the ontology we designed by explaining the steps we have taken and also the issues that were encountered in order to formulate and formalize it. (***Section 3***).
+In this report we first briefly touch upon on related work that has been done in this field describing  how ISPRA-CORE is organized (***Section 2***). We then proceed to illustrate the ontology we designed by explaining the steps we have taken and also the issues that were encountered in order to formulate and formalize it. (***Section 3***).
 
 After the description of the development of the ontology, we describe the process of **mapping** a Resource Description Framework (RDF) graph into triples through RDF Mapping Language (RML) (***Section 4***).
 
-Subsequently we deal with the alignment of our ontology with general ontologies (DBpedia) and with sector specific vocabularies (World Meteorological Organization) (***Section 5***).
+Then in ***Section 5*** we explain how we have deployed the system on a SPARQL endpoint through Virtuoso. **???**
 
-**6**
+Subsequently we deal with the alignment of our ontology with general ontologies (DBpedia) and with sector specific vocabularies (World Meteorological Organization) (***Section 6***). **???**
 
-**7**
 
+In ***Section 7*** we explain how to make the system work **???**
 
 After that, we present a way to implement the ontology, providing some examples of SPARQL queries relative to the SPARQL endpoint we published. The last section in the report deals with the conclusions related to this work and to draw upon for future steps that could be taken to expand and improve our work (***Section 8***).
 
@@ -140,3 +140,4 @@ Syntax highlighted code block
 ​
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
+</div>
