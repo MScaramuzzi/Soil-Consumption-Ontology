@@ -1,10 +1,13 @@
 # Knowledge Engineering Report
 
-<div style= "text-align; right"> 
+
 
 ## Abstract
 
+<div style= "text-align; right">  
 Soil consumption is a phenomenon associated with the loss of fundamental environmental assets, due to the artificial occupation of originally natural soil. This issue is being monitored by SNPA (*Sistema Nazionale per la Protezione dell’Ambiente*), and in recent years an ontology was published by ISPRA (*Istituto Superiore per la Protezione e la Ricerca Ambientale*). This work aims to be a refactor of that ontology, although with a different approach to the matter.​
+
+</div>
 
 <!--ts-->
 
@@ -140,4 +143,3 @@ Syntax highlighted code block
 ​
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-</div>
