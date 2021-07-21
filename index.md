@@ -15,7 +15,7 @@ Soil consumption is a phenomenon associated with the loss of fundamental environ
 
 ## 1.Introduction
 
-Soil consumption continues to transform the national territory at a high rate. In the last year, new artificial coverings have covered an additional $57.5 \space km^2$ or, on average, about $16 \space hectares \space per \space day$. (an extension of about 21 soccer fields covered by artificial surfaces per day). 
+Soil consumption continues to transform the national territory at a high rate. In the last year, new artificial coverings have covered an additional ```latex $57.5 \space km^2$ ``` or, on average, about $16 \space hectares \space per \space day$. (an extension of about 21 soccer fields covered by artificial surfaces per day). 
 
 The speed of land transformation recorded between 2017 and 2018 is maintained, i.e., 2 square meters of soil lost irreversibly every second. This is related to the construction and building of new infrastructures, the broadening of urban areas, but also to the expansion of agricultural areas. Indeed, the **most affected areas** are those with an **agricultural** vocation, where soil is consumption is about **three times more** than in urban areas. The phenomenon in the last year has been more intense in rural areas, where almost 2700 hectares have been cemented and less than half in medium-density urban areas.
 
@@ -25,7 +25,12 @@ In this report paper we first briefly touch upon on related work that has been d
 
 After the description of the development of the ontology, we describe the process of **mapping** a Resource Description Framework (RDF) graph into triples through RDF Mapping Language (RML) (***Section 4***).
 
-Subsequently we deal with the alignment of our ontology with general ontologies (DBpedia) and with sector specific vocabularies (World Meteorological Organization) (***Section 5***)
+Subsequently we deal with the alignment of our ontology with general ontologies (DBpedia) and with sector specific vocabularies (World Meteorological Organization) (***Section 5***).
+
+6
+
+7
+
 
 After that, we present a way to implement the ontology, providing some examples of SPARQL queries relative to the SPARQL endpoint we published. The last section in the report deals with the conclusions related to this work and to draw upon for future steps that could be taken to expand and improve our work (***Section 8***).
 
