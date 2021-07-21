@@ -52,6 +52,14 @@ In the following section we provide the necessary steps we took in order to form
 
 ### 3.1 Design Methodology
 
+| ID  | Competency Question                  |
+|-----|--------------------------------------|
+| CQ1 | What does an indicator describe?     |
+| CQ2 | What are the coordinates of a place? |
+| CQ3 | What metric describes the indicator? |
+| CQ4 | What is the organization that provided the place's code  |
+| CQ5 | What are  the indicators inside a collection? |
+
 ### 3.2 Ontology Description
 
 ## 4. Mapping rules and ontology publication(RML)
