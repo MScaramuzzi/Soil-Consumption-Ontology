@@ -74,6 +74,8 @@ In the following section we provide the necessary steps we took in order to form
 
 ### 3.2 Ontology Description
 
+In the following figure we present the knowledge graph that represents classes and object properties that define our ontology:
+
 ## 4. Mapping rules and ontology publication(RML)
 
 ## 5. Ontology alignment(LIMES)
@@ -88,7 +90,7 @@ In the following section we provide the necessary steps we took in order to form
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-​
+​![Knowledge graph](KG.png)
 
 ```markdown
 
