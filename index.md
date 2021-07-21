@@ -13,9 +13,9 @@ Soil consumption is a phenomenon associated with the loss of fundamental environ
 
 
 
-## 1.Introduction
+## 1. Introduction
 
-Soil consumption continues to transform the national territory at a high rate. In the last year, new artificial coverings have covered an additional ```latex $57.5 \space km^2$ ``` or, on average, about $16 \space hectares \space per \space day$. (an extension of about 21 soccer fields covered by artificial surfaces per day). 
+Soil consumption continues to transform the national territory at a high rate. In the last year, new artificial coverings have covered an additional  $57.5 \space km^2$  or, on average, about $16 \space hectares \space per \space day$. (an extension of about 21 soccer fields covered by artificial surfaces per day). 
 
 The speed of land transformation recorded between 2017 and 2018 is maintained, i.e., 2 square meters of soil lost irreversibly every second. This is related to the construction and building of new infrastructures, the broadening of urban areas, but also to the expansion of agricultural areas. Indeed, the **most affected areas** are those with an **agricultural** vocation, where soil is consumption is about **three times more** than in urban areas. The phenomenon in the last year has been more intense in rural areas, where almost 2700 hectares have been cemented and less than half in medium-density urban areas.
 
@@ -27,16 +27,28 @@ After the description of the development of the ontology, we describe the proces
 
 Subsequently we deal with the alignment of our ontology with general ontologies (DBpedia) and with sector specific vocabularies (World Meteorological Organization) (***Section 5***).
 
-6
+**6**
 
-7
+**7**
 
 
 After that, we present a way to implement the ontology, providing some examples of SPARQL queries relative to the SPARQL endpoint we published. The last section in the report deals with the conclusions related to this work and to draw upon for future steps that could be taken to expand and improve our work (***Section 8***).
 
-## 2.Related Work
+## 2. Related Work
 
-## 3.Ontology
+Linked ISPRA is a pilot project for the development and use of methodologies aimed at the production and publication of Linked Open Data according to the standards set by the World Wide Web Consortium (W3C). The objective is to develop a process for the production of Linked Open Data (LOD) starting from a significant set of datasets, aimed at creating an internal expertise on the methodology of publication (RDF framework).
+
+The datasets considered are related to the following matters:
+* Wave network and associated meteorological data (real time)
+* Tidal network and associated meteorological data (real time)
+* Public interventions for hydrogeological instability
+* **Soil consumption**
+
+Clearly this kind of project has a broader grasp because it encompasses  different domains of interest, while our work is focused solely on soil consumption, allowing us to restrict the range of action and focusing on developing a **lighter** and simpler ontology which can function **autonomously**.
+
+## 3. Ontology
+
+In the following section we provide the necessary steps we took in order to formulate and formalize the Soil Consumption Ontology.
 
 ### 3.1 Design Methodology
 
