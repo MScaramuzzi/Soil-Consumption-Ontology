@@ -1,16 +1,10 @@
 # Knowledge Engineering Report
 
-
-
 ## Abstract
 
-<div style= "text-align; justify">  
 Soil consumption is a phenomenon associated with the loss of fundamental environmental assets, due to the artificial occupation of originally natural soil. This issue is being monitored by SNPA (*Sistema Nazionale per la Protezione dell’Ambiente*), and in recent years an ontology was published by ISPRA (*Istituto Superiore per la Protezione e la Ricerca Ambientale*). This work aims to be a refactor of that ontology, although with a different approach to the matter.​
 
-</div>
-
 <!--ts-->
-
 
 <!--te-->
 
@@ -55,12 +49,13 @@ In the following section we provide the necessary steps we took in order to form
 
 ### 3.1 Design Methodology
 
-*The main technique we used to develop the project was compliant with the norms and requirements of the eXtreme Design methodology.*
+The main technique we used to develop the project was compliant with the norms and requirements of the eXtreme Design methodology. After studying the specific domain of soil consumption, we formulated various Competency Questions (CQs) that helped shape the ontology, followed by the application and usage of Ontology Design Patterns (ODPs) in order to overcome expressivity issues.
 
-*After studying the specific domain of soil consumption, we formulated various Competency Questions (CQs) that helped shape the ontology, followed by the application and usage of Ontology Design Patterns (ODPs) in order to overcome expressivity issues.*
+*inserisci qualche step in più*
 
-*After testing and adjusting various aspects of the ontology, we were finally able to complete it. Here are some examples of the CQs we used for modeling.*
+After testing and tuning various aspects of the ontology, we were finally able to complete it. Here are some examples of the CQs we used for modeling.
 
+*inserisci qualche step in più*
 
 | ID  | Competency Question                  |
 |-----|--------------------------------------|
@@ -72,13 +67,11 @@ In the following section we provide the necessary steps we took in order to form
 
  **Table 1** - *Competency Questions used for modeling the ontology*
 
-*By analyzing these CQs and many others like them, we were able to extrapolate a snapshot of the world that this domain was describing, and we used it to generate our classes in a way that matched to that precise pictures. We tried to represent the semantic connections between the various entities that populate this domain and give them their actual meaning as it was intended.*
-
+We were able to extrapolate a snapshot of the domain described in our ontology by analyzing these CQs and we used it to generate our classes in a way that matched a precise description of the domain. We aimed to make explicit the semantic connections between the various entities that populate this domain and to represent the intrinsic meaning behind these entities.
 
 ### 3.2 Ontology Description
 
 In the following figure we present the knowledge graph that represents classes and object properties that define our ontology:
-
 ​
 <img src="images/KG.png" alt="hi" class="inline"/>
 
@@ -97,21 +90,83 @@ The **:hasParameter** relation is necessary to equip an indicator with the parti
 
 Lastly, an indicator has :IndicatorValue, which itself is connected with a **:UnitOfMeasure**. There is a distinction to be made between **:Metric** and **:UnitOfMeasure** the former represents the general metric associated with an indicator, while the latter represents the particular unit of measure of the value which may be  a multiple or a submultiple of the metric associated with the indicator (if **:Metric** is meters, **:UnitOfMeasure** can be centimeter, kilometers etc.). This again, was done in order to provide reusability to the ontology: some applications in very different domains may need different magnitude of a unit of measures.
 
+// aggiungi parameter
+
 ## 4. Mapping rules and ontology publication(RML)
 
-## 5. Deployement on Virtuoso - SPARQL Queries ??
+//aggiungi alessandro
 
-## 6. Ontology alignment(LIMES) ??
+## 5. Deployement on Virtuoso - SPARQL Queries
 
-## 7. How to deploy the system ??
+In this project we have employed Fuseki for publishing our data on a SPARQL endpoint. This choice was motivated by the ease of use of Fuseki.  We have loaded the data produced by the mapping (mapping.ttl) by using the User Interface provided by Fuseki.
+
+
+```SPARQL
+SELECT *
+FROM
+
+```
+
+
+## 6. Ontology alignment(LIMES)
+
+Few of the classes in our ontology are actually present in the data produced by the mapping process, this is due the fact that classes encode very high level and general concepts our aim has been to achieve high reusability.
+
+Given the fact that a lot of classes aren't actually represented in the mapping of the data, very few classes can be aligned with common use ontologies such as **DBpedia**.
+
+Still, it has been possible to align the class **:Place** with the equivalent class in DBpedia.
+
+We have actually opted to align the class **:PopulatedPlace** which reduces the number of instances to look for in DBpedia, this has been done in order to reduce the computation time of the alignment, which would have been incredibly lengthy.
+
+We have realized the alignment by exploiting LIMES, a command line tool that can be configured through an XML file. It is possible to insert the information needed for the alignment by tuning some of the tags in the configuration file of LIMES.
+
+The relevant tags are:
+
+
+```XML 
+<PAGESIZE> 500000 </PAGESIZE>
+```  
+
+```XML 
+<METRIC> jaccard(s.name,t.name) </METRIC>
+```
+
+```XML 
+<ACCEPTED_THRESHOLD> 0.9 </ACCEPTED_THRESHOLD> <!--default value is 0.98-->
+<REVIEW_THRESHOLD> 0.7 </REVIEW_THRESHOLD> 
+```
+
+```XML 
+
+```
+
+## 7. Deployement on Virtuoso - SPARQL Queries 
+
+```SPARQL
+SELECT *
+FROM
+
+```
+
+## 8. How to deploy the system 
+
+1. Scarica Fuseki link
+   1. Sottindicazioni
+2. Carica mapping_125.ttl su fuseki
+3. Scarica Limes link
+   1. Sottoindicazioni
  
-## 8. Conclusion and future work
+## 9. Conclusion and future work
+
+There have been difficulties in the latter part of the project with technical tools such as:
+
+
+* Fuseki should be substituted by Virtuoso &rarr; fuseki becomes cumbersome with a lot of triples
+* Deployare tutto su un server
 
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-
 
 ```markdown
 
@@ -142,4 +197,3 @@ Syntax highlighted code block
 
 ​
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
