@@ -123,20 +123,65 @@ At line 104, we defined the template in such way that it contained both the plac
 <https://w3id.org/stlab/cascke/data/indicator/45010_C2> <https://w3id.org/stlab/cascke/ontology/hasMetric> 
 <https://w3id.org/stlab/cascke/C2>.
 
-This particular set of triples would be describing an indicator associated to the Municipality of Fabriano and its relative metric C2 that corresponds to non-consumed soil. In total, this mapping counts **X** triples and it was uploaded on w3id of of STlab.
+This particular set of triples would be describing an indicator associated to the Municipality of Fabriano and its relative metric C2 that corresponds to non-consumed soil. In total, this mapping counts 3780350 triples and it was uploaded on w3id of of STlab.
 
 
 
 ## 5. Deployement on Virtuoso - SPARQL Queries
 
-In this project we have employed Fuseki for publishing our data on a SPARQL endpoint. This choice was motivated by the ease of use of Fuseki.  We have loaded the data produced by the mapping (mapping.ttl) by using the User Interface provided by Fuseki.
+In this project we have employed Fuseki for publishing our data on a SPARQL endpoint. This choice was motivated by the ease of use of Fuseki.  We have loaded the data produced by the mapping (mapping_125.ttl) by using the User Interface provided by Fuseki.
 
+The high variety of types of indicators of soil consumption which are associated to each Place (C1,..,C125)  makes the output file of the size of almost 1 GB because it stores 3780350 triples.
+
+// triples in soil  
+
+### SPARQL queries
+
+Now we are going to implement some of the CQs as SPARQL queries
+
+
+
+#### CQ2: What are the values associated to a place’s collection? 
 
 ```SPARQL
-SELECT *
-FROM
+PREFIX myont:<https://w3id.org/stlab/cascke/ontology/>
+PREFIX dbpo: <http://dbpedia.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX my: <http://www.mobile.com/model/>
+SELECT  *
+WHERE {
+  ?s   myont:hasCollection ?o
+}
+
+LIMIT 500
+```
+
+//CQ2 
+
+We can see here that to each place is associated to a collection of values that measure some type of metric of soil consumption.
+
+#### CQ3: What metric describes the indicator? 
+
+```SPARQL
+PREFIX myont: <https://w3id.org/stlab/cascke/ontology/>
+PREFIX dbpo: <http://dbpedia.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX my: <http://www.mobile.com/model/>
+SELECT  ?s 
+WHERE {
+  ?s  ?p myont:Indicator
+}
+
+LIMIT 500
 
 ```
+//CQ3 
+
+In this query result set we can observe that an indicator is actually the conjunction of metric (on the left with respect to the underscore) and Place (on the right with respect to underscore). This design choice was made because when we refer to an indicator we want to capture a particular indicator in a specific place.
 
 
 ## 6. Ontology alignment(LIMES)
@@ -175,18 +220,13 @@ In this document we specify the endpoint SPARQL of the **SOURCE** (Soil Consumpt
 
 ```XML
 <ACCEPTED_THRESHOLD> 0.9 </ACCEPTED_THRESHOLD> <!--default value is 0.98-->
-
 ```
 
 * Here we are setting  minimum value that two instances must have in order to satisfy the relation specified in the RELATION tag, in our case **owl:sameAs**. We have chosen 0.9 for Accepted in order to not reject to many values
 
-```XML 
-
-```
-
 ### Alignment testing - SPARQL Queries
 
-After we the alignment process we procedeed to upload the *accepted.nt* to Fuseki as a named-graph in order to test if the alignment process was successful. We have made two queries to test this
+After we the alignment process we procedeed to upload the *accepted.nt* to Fuseki as a named-graph in order to test if the alignment process was successful. We have made two queries to test this.
 
 #### Query 1
 
@@ -223,6 +263,7 @@ SELECT (COUNT(*) as ?uniqueTargetPlace){
 	?s ?p ?o
 	}
 }
+
 ```
 Output: (**metti immagine**) "1806"^^xsd:integer
 
@@ -244,38 +285,3 @@ There have been difficulties in the latter part of the project with technical to
 
 * Fuseki should be substituted by Virtuoso &rarr; fuseki becomes cumbersome with a lot of triples
 * Deployare tutto su un server
-* <!--Ruda-->
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-
-Syntax highlighted code block
-
-# Header 1
-
-## Header 2
-
-### Header 3
-
-- Bulleted
-
-- List
-
-​
-
-1. Numbered
-
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-
-[Link](url) and ![Image](src)
-
-```
-
-​
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
