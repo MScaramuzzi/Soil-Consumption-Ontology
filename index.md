@@ -162,7 +162,9 @@ WHERE {
 LIMIT 500
 ```
 
-//CQ2 
+
+
+<img src="image/CQ2.png" alt="hi" class="inline"/>
 
 We can see here that to each place is associated to a collection of values that measure some type of metric of soil consumption.
 
@@ -183,7 +185,7 @@ WHERE {
 LIMIT 500
 
 ```
-//CQ3 
+<img src="image/CQ3.png" alt="hi" class="inline"/>
 
 In this query result set we can observe that an indicator is actually the conjunction of metric (on the left with respect to the underscore) and Place (on the right with respect to underscore). This design choice was made because when we refer to an indicator we want to capture a particular indicator in a specific place.
 
@@ -197,7 +199,6 @@ Given the fact that a lot of classes aren't actually represented in the mapping 
 Still, it has been possible to align the class **:Place** with the equivalent class in DBpedia.
 
 
- //**immagine**
 We have actually opted to align the class **:PopulatedPlace** which reduces the number of instances to look for in DBpedia, this has been done in order to reduce the computation time of the alignment, which would have been incredibly lengthy.
 
 We have realized the alignment by exploiting LIMES, a command line tool that can be configured through an XML file. It is possible to insert the information needed for the alignment by tuning some of the tags in the configuration file of LIMES, which we called **file.xml**.
@@ -226,7 +227,13 @@ In this document we specify the endpoint SPARQL of the **SOURCE** (Soil Consumpt
 <ACCEPTED_THRESHOLD> 0.9 </ACCEPTED_THRESHOLD> <!--default value is 0.98-->
 ```
 
-* Here we are setting  minimum value that two instances must have in order to satisfy the relation specified in the RELATION tag, in our case **owl:sameAs**. We have chosen 0.9 for Accepted in order to not reject to many values
+* Here we are setting  minimum value that two instances must have in order to satisfy the relation specified in the RELATION tag, in our case **owl:sameAs**. We have chosen 0.9 for Accepted in order to not reject to many values.
+
+After invokating Limes through the command line, this is the result of the alignment process.
+
+<img src="image/limes_result.png" alt="hi" class="inline"/>
+
+We can see that 1882 triples have been aligned.
 
 ### Alignment testing - SPARQL Queries
 
