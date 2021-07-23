@@ -27,9 +27,8 @@ Then in ***Section 5*** we explain how we have deployed the system on a SPARQL e
 Subsequently we deal with the alignment of our ontology with general ontologies (DBpedia) n(***Section 6***). 
 
 
-In ***Section 7*** we explain the steps to take in order to reacreate our work. 
 
-After that, we present a way to implement the ontology, providing some examples of SPARQL queries relative to the SPARQL endpoint we published. The last section in the report deals with the conclusions related to this work and to draw upon for future steps that could be taken to expand and improve our work (***Section 8***).
+After that, we present a way to implement the ontology, providing some examples of SPARQL queries relative to the SPARQL endpoint we published. The last section in the report deals with the conclusions related to this work and to draw upon for future steps that could be taken to expand and improve our work (***Section 7***).
 
 ## 2. Related Work
 
@@ -60,9 +59,9 @@ After testing and tuning various aspects of the ontology, we were finally able t
 | ID  | Competency Question                  |
 |-----|--------------------------------------|
 | CQ1 | What does an indicator describe?     |
-| CQ2 | What are the coordinates of a place? |
+| CQ2 | What are the values associated to a place’s collection? |
 | CQ3 | What metric describes the indicator? |
-| CQ4 | What is the organization that provided the place's code  |
+| CQ4 | What is the organization that provided the place's code?  |
 
 
  **Table 1** - *Competency Questions used for modeling the ontology*
@@ -73,7 +72,9 @@ We were able to extrapolate a **snapshot** of the domain of knowledge described 
 
 In the following figure we present the knowledge graph that represents classes and object properties that define our ontology:
 ​
-<img src="images/KG.png" alt="hi" class="inline"/>
+<img src="image/KG.png" alt="hi" class="inline"/>
+
+Figure 1 - **Knowledge Graph**
 
 
 The two main classes in this graph are **:Indicator** and **:Place**. These two classes subtend the components we want to focus on our domain: measurements and geographical coordinates.
@@ -110,6 +111,8 @@ The final code, relative in particular to the triples maps for the Places, Indic
 The following is an extract of the RML, specifically the part relative to the triples map defining the indicators and their associated metric:
 
  
+<img src="image/KG.png" alt="hi" class="inline"/>
+
 Figure 2 - RML extract **inserisci immagine**
 
 
@@ -270,18 +273,16 @@ Output: (**metti immagine**) "1806"^^xsd:integer
 We can see there is a bit of redundancies especially in the Places coming from the source (our) ontology.
 
 
-## 8. How to deploy the system
-
-1. Scarica Fuseki link
-   1. Sottindicazioni
-2. Carica mapping_125.ttl su fuseki
-3. Scarica Limes link
-   1. Sottoindicazioni
  
-## 9. Conclusions and future work
-
-There have been difficulties in the latter part of the project with technical tools such as:
+## 7. Conclusions and future work
 
 
-* Fuseki should be substituted by Virtuoso &rarr; fuseki becomes cumbersome with a lot of triples
-* Deployare tutto su un server
+### Conclusions
+
+* The data present in the csv files is not really comprehensive, thus the data  mapped from our ontolgy is not able to capture many of the classes we designed.
+  * In order to be able to extract more knowledge the project would need to start from a better source of data.
+
+### Future work
+
+* Fuseki should be substituted by a more powerful SPARQL Engine that like Virtuoso, for instance Fuseki becomes cumbersome and slow when dealing with a lot of triples.
+*  Our work has been deployed on our local machine, it should be tested on a remote server. 
