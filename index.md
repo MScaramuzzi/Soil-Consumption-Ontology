@@ -231,19 +231,19 @@ We can now analyze some of the relevant tags for understanding the alignment pro
 <ACCEPTED_THRESHOLD> 0.9 </ACCEPTED_THRESHOLD> <!--default value is 0.98-->
 ```
 
-* Here we are setting  minimum value that two instances must have in order to satisfy the relation specified in the RELATION tag, in our case **owl:sameAs**. We have chosen 0.9 for Accepted in order to not reject to many values.
+* Here we are setting  minimum value that two instances must have in order to satisfy the relation specified in the RELATION tag, in our case **owl:sameAs**. We have chosen 0.9 for Accepted in order to not reject too many instances which are very close to satisfying the condition.
 
 After invokating Limes through the command line, this is the result of the alignment process.
 
 <img src="image/limes_result.png" alt="hi" class="inline"/>
 
-We can see that 1882 triples have been aligned.
+We can see that **1882** triples have been aligned.
 
-### Alignment testing - SPARQL Queries
+### 6.2 Alignment testing - SPARQL Queries
 
 After we the alignment process we procedeed to upload the *accepted.nt* to Fuseki as a named-graph in order to test if the alignment process was successful. We have made two queries to test this.
 
-#### Query 1
+#### 6.2.1 Query 1
 
 ```SPARQL
 SELECT *
@@ -255,7 +255,7 @@ WHERE {
 
 The first query is useful for getting a general look at the result set. There 1882 triples which are the contents of the accepted.nt file.
 
-#### Query 2
+#### 6.2.2 Query 2
 
 Now we want to display, for example, the number of unique Places both in the source and in target ontology. The only relation in this file is the owl:sameAs.
 
@@ -268,8 +268,9 @@ SELECT (COUNT(*) as ?uniqueSourcePlaces){
 	}
 }
 ```
+<img src="image/unique-source-Places.png" alt="hi" class="inline"/>
 
-Output: (**metti immagine**) "1646"^^xsd:integer
+We can see that there are 1646 **unique** places in our ontology.
 
 ```SPARQL
 SELECT (COUNT(*) as ?uniqueTargetPlace){
@@ -280,10 +281,11 @@ SELECT (COUNT(*) as ?uniqueTargetPlace){
 }
 
 ```
-Output: (**metti immagine**) "1806"^^xsd:integer
+<img src="image/unique-target-Places.png" alt="hi" class="inline"/
 
-We can see there is a bit of redundancies especially in the Places coming from the source (our) ontology.
+We can see that there are 1806 **unique** places aligned in the target ontology.
 
+From this we can infer that there are some redundancies in the ontologies aligned, especially in the source ontology where there 1646 unique Places but there 1882 triples.
 
  
 ## 7. Conclusions and future work
@@ -293,6 +295,7 @@ We can see there is a bit of redundancies especially in the Places coming from t
 
 * The data present in the csv files is not really comprehensive, thus the data  mapped from our ontology is not able to capture many of the classes we designed.
   * In order to be able to extract more knowledge the project would need to start from a better source of data.
+* 
 
 ### Future work
 
