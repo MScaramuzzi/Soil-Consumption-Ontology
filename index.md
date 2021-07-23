@@ -72,7 +72,8 @@ We were able to extrapolate a **snapshot** of the domain of knowledge described 
 
 In the following figure we present the knowledge graph that represents classes and object properties that define our ontology:
 ​
-<img src="image/KG.png" alt="hi" class="inline"/>
+<img src="image/soil-consumption-knowledge-graph.png
+" alt="hi" class="inline"/>
 
 Figure 1 - **Knowledge Graph**
 
@@ -111,7 +112,7 @@ The final code, relative in particular to the triples maps for the Places, Indic
 The following is an extract of the RML, specifically the part relative to the triples map defining the indicators and their associated metric:
 
  
-<img src="image/KG.png" alt="hi" class="inline"/>
+<img src="image/soil-consumption-knowledge-graph.png" alt="hi" class="inline"/>
 
 Figure 2 - RML extract **inserisci immagine**
 
