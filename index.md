@@ -12,7 +12,7 @@ Soil consumption is a phenomenon associated with the loss of fundamental environ
 
 ## 1. Introduction
 
-Soil consumption continues to transform the national territory at a high rate. In the last year, new artificial coverings have covered an additional  $57.5 \space km^2$  or, on average, about $16 \space hectares \space per \space day$. (an extension of about 21 soccer fields covered by artificial surfaces per day). 
+Soil consumption continues to transform the national territory at a high rate. In the last year, new artificial coverings have covered an additional 57.5  km^2 or, on average, about 16  hectares per day(an extension of about 21 soccer fields covered by artificial surfaces per day).
 
 The speed of land transformation recorded between 2017 and 2018 is maintained, i.e., 2 square meters of soil lost irreversibly every second. This is related to the construction and building of new infrastructures, the broadening of urban areas, but also to the expansion of agricultural areas. Indeed, the **most affected areas** are those with an **agricultural** vocation, where soil is consumption is about **three times more** than in urban areas. The phenomenon in the last year has been more intense in rural areas, where almost 2700 hectares have been cemented and less than half in medium-density urban areas.
 
@@ -22,12 +22,12 @@ In this report we first briefly touch upon on related work that has been done in
 
 After the description of the development of the ontology, we describe the process of **mapping** a Resource Description Framework (RDF) graph into triples through RDF Mapping Language (RML) (***Section 4***).
 
-Then in ***Section 5*** we explain how we have deployed the system on a SPARQL endpoint through Virtuoso. **???**
+Then in ***Section 5*** we explain how we have deployed the system on a SPARQL endpoint through Virtuoso. 
 
-Subsequently we deal with the alignment of our ontology with general ontologies (DBpedia) and with sector specific vocabularies (World Meteorological Organization) (***Section 6***). **???**
+Subsequently we deal with the alignment of our ontology with general ontologies (DBpedia) n(***Section 6***). 
 
 
-In ***Section 7*** we explain how to make the system work **???**
+In ***Section 7*** we explain the steps to take in order to reacreate our work. 
 
 After that, we present a way to implement the ontology, providing some examples of SPARQL queries relative to the SPARQL endpoint we published. The last section in the report deals with the conclusions related to this work and to draw upon for future steps that could be taken to expand and improve our work (***Section 8***).
 
@@ -49,13 +49,13 @@ In the following section we provide the necessary steps we took in order to form
 
 ### 3.1 Design Methodology
 
-The main technique we used to develop the project was compliant with the norms and requirements of the eXtreme Design methodology. After studying the specific domain of soil consumption, we formulated various Competency Questions (CQs) that helped shape the ontology, followed by the application and usage of Ontology Design Patterns (ODPs) in order to overcome expressivity issues.
+The main technique we used to develop the project was compliant with the norms and requirements of the eXtreme Design methodology. After studying the specific domain of soil consumption, we formulated various **Competency Question**s (CQs) that helped shape the ontology, followed by the application and usage of **Ontology Design Patterns** (ODPs) in order to overcome expressivity issues.
 
-*inserisci qualche step in più*
+
 
 After testing and tuning various aspects of the ontology, we were finally able to complete it. Here are some examples of the CQs we used for modeling.
 
-*inserisci qualche step in più*
+
 
 | ID  | Competency Question                  |
 |-----|--------------------------------------|
@@ -63,11 +63,11 @@ After testing and tuning various aspects of the ontology, we were finally able t
 | CQ2 | What are the coordinates of a place? |
 | CQ3 | What metric describes the indicator? |
 | CQ4 | What is the organization that provided the place's code  |
-| CQ5 | What are  the indicators inside a collection? |
+
 
  **Table 1** - *Competency Questions used for modeling the ontology*
 
-We were able to extrapolate a snapshot of the domain described in our ontology by analyzing these CQs and we used it to generate our classes in a way that matched a precise description of the domain. We aimed to make explicit the semantic connections between the various entities that populate this domain and to represent the intrinsic meaning behind these entities.
+We were able to extrapolate a **snapshot** of the domain of knowledge described in our ontology by analyzing these CQs and we used it to generate our classes in a way that matched a precise description of the domain. We aimed to make explicit the semantic connections between the various entities that populate this domain and to represent the intrinsic meaning that these entities underlie.
 
 ### 3.2 Ontology Description
 
@@ -80,9 +80,9 @@ The two main classes in this graph are **:Indicator** and **:Place**. These two 
 
 Starting from the latter of the two, we can see that it was modeled by using the well-known Logical ODP N-Ary relation in order to distinguish the various types of locations. This instantiation of the pattern has four subclasses represented by **:Nazione**, **:Regione**, **:Provincia**, **:Comune**, which are characterized by a hierarchical feature, determined by the Logical ODP **Transitive Reduction**. In particular, it is defined with two properties **:contains** and **:containsDirectly**, the former being transitive.
 
-*A **:PlaceCode** is associated to a **:Place**, and it can be released by any **:Organization** based on the country (ISTAT for Italy), this class was modeled in such a general way in order to make it independent of the country in which the ontology can be deployed on. An important feature of **:Place** is found in its **:Geometry**, which is a broader definition used to describe its geographical features which can vary from latitude and longitude to being a centroid, the specific implementation of this depends on how the **rdfs:Literal** is defined.*
+A **:PlaceCode** is associated to a **:Place**, and it can be released by any **:Organization** based on the country (ISTAT for Italy), this class was modeled in such a general way in order to make it independent of the country in which the ontology can be deployed on. An important feature of **:Place** is found in its **:Geometry**, which is a broader definition used to describe its geographical features which can vary from latitude and longitude to being a centroid, the specific implementation of this depends on how the **rdfs:Literal** is defined.
 
-To each **:Place** it is linked one or more :Collection of **:Indicator**. By using the Logical ODP **Property Chain**, if a **:Collection** is defined by a particular **:CollectionMetric**, the same metric is valid for the **:Indicator**, this feature is not meant to be used in our context, it is to generalize the ontology and facilitate its reuse in other domains of interest.(nei contesti di misurazioni???)
+To each **:Place** it is linked one or more :Collection of **:Indicator**. By using the Logical ODP **Property Chain**, if a **:Collection** is defined by a particular **:CollectionMetric**, the same metric is valid for the **:Indicator**, this feature is not meant to be used in our context, it is to generalize the ontology and facilitate its reuse in other similar domains of interest.
 
 **:Indicator** itself is another application of the **N-Ary relation** pattern. The rationale behind this choice is that we needed to model a process that involved many classes at the same time. Any entity of **:Indicator** is provided with a **:atTime** relation, connected to a **:TimeEntity** that could be either an **:Instant** or a time **:Interval**. This design choice was made because we wanted to generalize the concept of time related to a particular indicator. As it was explained in the previous paragraph, an indicator is provided with a **:Metric** that represents the general type of measure an indicator is associated with (could be hectares, percentage, square meters etc.).
 
@@ -90,11 +90,42 @@ The **:hasParameter** relation is necessary to equip an indicator with the parti
 
 Lastly, an indicator has :IndicatorValue, which itself is connected with a **:UnitOfMeasure**. There is a distinction to be made between **:Metric** and **:UnitOfMeasure** the former represents the general metric associated with an indicator, while the latter represents the particular unit of measure of the value which may be  a multiple or a submultiple of the metric associated with the indicator (if **:Metric** is meters, **:UnitOfMeasure** can be centimeter, kilometers etc.). This again, was done in order to provide reusability to the ontology: some applications in very different domains may need different magnitude of a unit of measures.
 
-// aggiungi parameter
+
 
 ## 4. Mapping rules and ontology publication(RML)
 
-//aggiungi alessandro
+In order to proceed for this step, the use of the pyRML python engine developed by Andrea Nuzzolese was necessary.
+
+The process of knowledge extraction started from the study and comprehension of the data we wanted to map: the data itself was composed of various csv tables we got directly from the ISPRA soil consumption web page.
+
+After understanding what kind of information these tables bore, the first step was to merge all the tables regarding the places (region, municipality, etc.) and the relative indicator values (from C1 to C125), resulting in a large **8177x127** csv file called **Places.csv**. 
+
+The other table we used for mapping the data was the one that contained information about the indicator metrics and parameters, called **Info.csv**. In the making of these resulting tables, processes of data cleaning were also utilized. The mapping itself consists in a RML file developed in Turtle syntax, which involves five subject maps (and other object maps), used to map Places, Metrics, Indicator Values, Indicators and Parameters.
+
+While the triples maps for Metrics and Parameters were straightforward and relatively simple, for the other maps it was necessary to do a work of Python function injection.
+In fact, it was necessary to modify the python code inside the converter.py file, adding the notion of “parameters”, making it possible to iterate inside the Turtle file, which proved to be very useful for the mapping endeavour.
+
+The final code, relative in particular to the triples maps for the Places, Indicator-Values and Indicators, is characterized by the presence of for loops that are used to iterate trough the already cited variable called “**parameters**”. This kind of injection was crucial in order to correctly map the 125 indicator values associated to each place.
+
+The following is an extract of the RML, specifically the part relative to the triples map defining the indicators and their associated metric:
+
+ 
+Figure 2 - RML extract **inserisci immagine**
+
+
+In this figure, other than the already mentioned python function injection that opens at line 100 and closes at line 115 denoted by the curly brackets, it possible to notice how the class of the indicators was mapped.
+
+At line 104, we defined the template in such way that it contained both the place code and the parameter relative to the single indicator. With this design choice the result is that a single indicator is defined by the place it is associated to and its metric code: an example of a triple for this kind of mapping could be the following:
+
+<https://w3id.org/stlab/cascke/data/indicator/42017_C2>
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/stlab/cascke/ontology/Indicator>.
+
+<https://w3id.org/stlab/cascke/data/indicator/45010_C2> <https://w3id.org/stlab/cascke/ontology/hasMetric> 
+<https://w3id.org/stlab/cascke/C2>.
+
+This particular set of triples would be describing an indicator associated to the Municipality of Fabriano and its relative metric C2 that corresponds to non-consumed soil. In total, this mapping counts **X** triples and it was uploaded on w3id of of STlab.
+
+
 
 ## 5. Deployement on Virtuoso - SPARQL Queries
 
@@ -116,26 +147,24 @@ Given the fact that a lot of classes aren't actually represented in the mapping 
 
 Still, it has been possible to align the class **:Place** with the equivalent class in DBpedia.
 
+
+ //**immagine**
 We have actually opted to align the class **:PopulatedPlace** which reduces the number of instances to look for in DBpedia, this has been done in order to reduce the computation time of the alignment, which would have been incredibly lengthy.
 
-We have realized the alignment by exploiting LIMES, a command line tool that can be configured through an XML file. It is possible to insert the information needed for the alignment by tuning some of the tags in the configuration file of LIMES.
+We have realized the alignment by exploiting LIMES, a command line tool that can be configured through an XML file. It is possible to insert the information needed for the alignment by tuning some of the tags in the configuration file of LIMES, which we called **file.xml**.
 
-In this document we specify the endpoint SPARQL of the **SOURCE** and the **TARGET** ontolgy. In this case the two are:
+In this document we specify the endpoint SPARQL of the **SOURCE** (Soil Consumption Ontology) and the **TARGET** (DBpedia) ontolgy. In this case the two are:
 
-* http://localhost:3030/soil/sparql
-* http://dbpedia.org/sparql
+* <http://localhost:3030/soil/sparql>
+* <http://dbpedia.org/sparql>
 
-
-
-### Relevant tags for the alignment 
-
-
+### Relevant tags for the alignment in the configuration file
 
 ```XML
 <PAGESIZE> 500000 </PAGESIZE> 
 ```  
 
-* This tag represents maximal number of triples returned by the SPARQL endpoint per query
+* This tag represents maximal number of triples returned for each query by the SPARQL endpoint during the alignment process.
 
 
 ```XML 
@@ -146,26 +175,59 @@ In this document we specify the endpoint SPARQL of the **SOURCE** and the **TARG
 
 ```XML
 <ACCEPTED_THRESHOLD> 0.9 </ACCEPTED_THRESHOLD> <!--default value is 0.98-->
-<REVIEW_THRESHOLD> 0.7 </REVIEW_THRESHOLD> 
+
 ```
 
-* Here we are setting  minimum value that two instances must have in order to satisfy the relation specified in the RELATION tag, in our case **owl:sameAs**. We have chosen 0.9 for accepted and 0.7 for review 
+* Here we are setting  minimum value that two instances must have in order to satisfy the relation specified in the RELATION tag, in our case **owl:sameAs**. We have chosen 0.9 for Accepted in order to not reject to many values
 
 ```XML 
 
 ```
 
-## 7. Deployment on Virtuoso - SPARQL Queries 
+### Alignment testing - SPARQL Queries
+
+After we the alignment process we procedeed to upload the *accepted.nt* to Fuseki as a named-graph in order to test if the alignment process was successful. We have made two queries to test this
+
+#### Query 1
 
 ```SPARQL
 SELECT *
-FROM
+WHERE {
+    ?s ?p ?o
+}
 
 ```
 
-Even though we have employed the nolang filter inside the XML files some improper alignment have been done
+The first query is useful for getting a general look at the result set. There 1882 triples which are the contents of the accepted.nt file.
 
-<!--Ruda-->
+#### Query 2
+
+Now we want to display, for example, the number of unique Places both in the source and in target ontology. The only relation in this file is the owl:sameAs.
+
+
+```SPARQL
+SELECT (COUNT(*) as ?uniqueSourcePlaces){
+	SELECT DISTINCT  ?s
+  WHERE {
+	?s ?p ?o
+	}
+}
+```
+
+Output: (**metti immagine**) "1646"^^xsd:integer
+
+```SPARQL
+SELECT (COUNT(*) as ?uniqueTargetPlace){
+	SELECT DISTINCT  ?o
+  WHERE {
+	?s ?p ?o
+	}
+}
+```
+Output: (**metti immagine**) "1806"^^xsd:integer
+
+We can see there is a bit of redundancies especially in the Places coming from the source (our) ontology.
+
 
 ## 8. How to deploy the system
 
@@ -182,6 +244,7 @@ There have been difficulties in the latter part of the project with technical to
 
 * Fuseki should be substituted by Virtuoso &rarr; fuseki becomes cumbersome with a lot of triples
 * Deployare tutto su un server
+* <!--Ruda-->
 
 ### Markdown
 
