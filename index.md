@@ -133,7 +133,7 @@ An example of a triple for this kind of mapping could be the following:
 This particular set of triples would be describing an indicator associated to the Municipality of Fabriano and its relative metric C2 that corresponds to non-consumed soil. In total, this mapping counts **3780350** triples and it was uploaded on w3id of of STlab.
 
 
-## 5. Deployement on Virtuoso - SPARQL Queries
+## 5. Deployment on Virtuoso - SPARQL Queries
 
 In this project we have employed Fuseki for publishing our data on a SPARQL endpoint. This choice was motivated by the ease of use of Fuseki.  We have loaded the data produced by the mapping (mapping_125.ttl) by using the User Interface provided by Fuseki.
 
@@ -300,4 +300,4 @@ From this we can infer that there are some redundancies in the ontologies aligne
 ### Future work
 
 * Fuseki should be substituted by a more powerful SPARQL Engine that like Virtuoso, for instance Fuseki becomes cumbersome and slow when dealing with a lot of triples.
-*  Our work has been deployed on our local machine, it should be tested on a remote server. 
+*  Our work has been deployed on our local machine, it should be tested on a remote server.
