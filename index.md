@@ -120,27 +120,42 @@ We have actually opted to align the class **:PopulatedPlace** which reduces the 
 
 We have realized the alignment by exploiting LIMES, a command line tool that can be configured through an XML file. It is possible to insert the information needed for the alignment by tuning some of the tags in the configuration file of LIMES.
 
-The relevant tags are:
+In this document we specify the endpoint SPARQL of the **SOURCE** and the **TARGET** ontolgy. In this case the two are:
+
+* http://localhost:3030/soil/sparql
+* http://dbpedia.org/sparql
 
 
-```XML 
-<PAGESIZE> 500000 </PAGESIZE>
+
+### Relevant tags for the alignment 
+
+
+
+```XML
+<PAGESIZE> 500000 </PAGESIZE> 
 ```  
+
+* This tag represents maximal number of triples returned by the SPARQL endpoint per query
+
 
 ```XML 
 <METRIC> jaccard(s.name,t.name) </METRIC>
 ```
 
-```XML 
+* In this tag we specify the type of Link Specification to perform. In this case we have chosen the Jaccard index which is a statistic used for comparing the similarity and diversity of sample sets, is defined as the size of the intersection divided by the size of the union of the sample sets
+
+```XML
 <ACCEPTED_THRESHOLD> 0.9 </ACCEPTED_THRESHOLD> <!--default value is 0.98-->
 <REVIEW_THRESHOLD> 0.7 </REVIEW_THRESHOLD> 
 ```
 
+* Here we are setting  minimum value that two instances must have in order to satisfy the relation specified in the RELATION tag, in our case **owl:sameAs**. We have chosen 0.9 for accepted and 0.7 for review 
+
 ```XML 
 
 ```
 
-## 7. Deployement on Virtuoso - SPARQL Queries 
+## 7. Deployment on Virtuoso - SPARQL Queries 
 
 ```SPARQL
 SELECT *
@@ -148,7 +163,11 @@ FROM
 
 ```
 
-## 8. How to deploy the system 
+Even though we have employed the nolang filter inside the XML files some improper alignment have been done
+
+<!--Ruda-->
+
+## 8. How to deploy the system
 
 1. Scarica Fuseki link
    1. Sottindicazioni
@@ -156,7 +175,7 @@ FROM
 3. Scarica Limes link
    1. Sottoindicazioni
  
-## 9. Conclusion and future work
+## 9. Conclusions and future work
 
 There have been difficulties in the latter part of the project with technical tools such as:
 
