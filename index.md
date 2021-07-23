@@ -48,7 +48,7 @@ In the following section we provide the necessary steps we took in order to form
 
 ### 3.1 Design Methodology
 
-The main technique we used to develop the project was compliant with the norms and requirements of the eXtreme Design methodology. After studying the specific domain of soil consumption, we formulated various **Competency Question**s (CQs) that helped shape the ontology, followed by the application and usage of **Ontology Design Patterns** (ODPs) in order to overcome expressivity issues.
+The main technique we used to develop the project was compliant with the norms and requirements of the eXtreme Design methodology. After studying the specific domain of soil consumption, we formulated various **Competency Questions** (CQs) that helped shape the ontology, followed by the application and usage of **Ontology Design Patterns** (ODPs) in order to overcome expressivity issues.
 
 
 
@@ -66,27 +66,28 @@ After testing and tuning various aspects of the ontology, we were finally able t
 
  **Table 1** - *Competency Questions used for modeling the ontology*
 
-We were able to extrapolate a **snapshot** of the domain of knowledge described in our ontology by analyzing these CQs and we used it to generate our classes in a way that matched a precise description of the domain. We aimed to make explicit the semantic connections between the various entities that populate this domain and to represent the intrinsic meaning that these entities underlie.
+We were able to extrapolate a **snapshot** of the **domain** of **knowledge** described in our ontology by analyzing these CQs and we used it to generate our classes in a way that matched a precise description of the domain. We aimed to make explicit the semantic connections between the various entities that populate this domain and to represent the intrinsic meaning that these entities underlie.
 
 ### 3.2 Ontology Description
 
 In the following figure we present the knowledge graph that represents classes and object properties that define our ontology:
 ​
+
 <img src="image/soil-consumption-knowledge-graph.png
-" alt="hi" class="inline"/>
+" alt="hi"/>
 
 Figure 1 - **Knowledge Graph**
 
 
 The two main classes in this graph are **:Indicator** and **:Place**. These two classes subtend the components we want to focus on our domain: measurements and geographical coordinates.
 
-Starting from the latter of the two, we can see that it was modeled by using the well-known Logical ODP N-Ary relation in order to distinguish the various types of locations. This instantiation of the pattern has four subclasses represented by **:Nazione**, **:Regione**, **:Provincia**, **:Comune**, which are characterized by a hierarchical feature, determined by the Logical ODP **Transitive Reduction**. In particular, it is defined with two properties **:contains** and **:containsDirectly**, the former being transitive.
+Starting from the latter of the two, we can see that it was modeled by using the well-known Logical ODP N-ary relation in order to distinguish the various types of locations. This instantiation of the pattern has four subclasses represented by **:Nazione**, **:Regione**, **:Provincia**, **:Comune**, which are characterized by a hierarchical feature, determined by the Logical ODP **Transitive Reduction**. In particular, it is defined with two properties **:contains** and **:containsDirectly**, the former being transitive.
 
 A **:PlaceCode** is associated to a **:Place**, and it can be released by any **:Organization** based on the country (ISTAT for Italy), this class was modeled in such a general way in order to make it independent of the country in which the ontology can be deployed on. An important feature of **:Place** is found in its **:Geometry**, which is a broader definition used to describe its geographical features which can vary from latitude and longitude to being a centroid, the specific implementation of this depends on how the **rdfs:Literal** is defined.
 
-To each **:Place** it is linked one or more :Collection of **:Indicator**. By using the Logical ODP **Property Chain**, if a **:Collection** is defined by a particular **:CollectionMetric**, the same metric is valid for the **:Indicator**, this feature is not meant to be used in our context, it is to generalize the ontology and facilitate its reuse in other similar domains of interest.
+To each **:Place** it is linked one or more **:Collection** of **:Indicator**. By using the Logical ODP **Property Chain**, if a **:Collection** is defined by a particular **:CollectionMetric**, the same metric is valid for the **:Indicator**, this feature is not meant to be used in our context, it is to generalize the ontology and facilitate its reuse in other similar domains of interest.
 
-**:Indicator** itself is another application of the **N-Ary relation** pattern. The rationale behind this choice is that we needed to model a process that involved many classes at the same time. Any entity of **:Indicator** is provided with a **:atTime** relation, connected to a **:TimeEntity** that could be either an **:Instant** or a time **:Interval**. This design choice was made because we wanted to generalize the concept of time related to a particular indicator. As it was explained in the previous paragraph, an indicator is provided with a **:Metric** that represents the general type of measure an indicator is associated with (could be hectares, percentage, square meters etc.).
+**:Indicator** itself is another application of the **N-ary relation** pattern. The rationale behind this choice is that we needed to model a process that involved many classes at the same time. Any entity of **:Indicator** is provided with a **:atTime** relation, connected to a **:TimeEntity** that could be either an **:Instant** or a time **:Interval**. This design choice was made because we wanted to generalize the concept of time related to a particular indicator. As it was explained in the previous paragraph, an indicator is provided with a **:Metric** that represents the general type of measure an indicator is associated with (could be hectares, percentage, square meters etc.).
 
 The **:hasParameter** relation is necessary to equip an indicator with the particular task it is used for (soil consumption, non-classified soil, inhabitants for hectare etc.), thus enabling to instantiate it to any application of the ontology by whomever aims to reuse it.
 
@@ -112,14 +113,16 @@ The final code, relative in particular to the triples maps for the Places, Indic
 The following is an extract of the RML, specifically the part relative to the triples map defining the indicators and their associated metric:
 
  
-<img src="image/soil-consumption-knowledge-graph.png" alt="hi" class="inline"/>
+<img src="image/rml.png" alt="hi" class="inline"/>
 
-Figure 2 - RML extract **inserisci immagine**
+Figure 2 - **Code for RML extraction of data**
 
 
 In this figure, other than the already mentioned python function injection that opens at line 100 and closes at line 115 denoted by the curly brackets, it possible to notice how the class of the indicators was mapped.
 
-At line 104, we defined the template in such way that it contained both the place code and the parameter relative to the single indicator. With this design choice the result is that a single indicator is defined by the place it is associated to and its metric code: an example of a triple for this kind of mapping could be the following:
+At line 104, we defined the template in such way that it contained both the place code and the parameter relative to the single indicator. By committing to this design choice the result is that a single indicator is defined by the place it is associated to and its metric code.
+
+An example of a triple for this kind of mapping could be the following:
 
 <https://w3id.org/stlab/cascke/data/indicator/42017_C2>
 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/stlab/cascke/ontology/Indicator>.
@@ -127,8 +130,7 @@ At line 104, we defined the template in such way that it contained both the plac
 <https://w3id.org/stlab/cascke/data/indicator/45010_C2> <https://w3id.org/stlab/cascke/ontology/hasMetric> 
 <https://w3id.org/stlab/cascke/C2>.
 
-This particular set of triples would be describing an indicator associated to the Municipality of Fabriano and its relative metric C2 that corresponds to non-consumed soil. In total, this mapping counts 3780350 triples and it was uploaded on w3id of of STlab.
-
+This particular set of triples would be describing an indicator associated to the Municipality of Fabriano and its relative metric C2 that corresponds to non-consumed soil. In total, this mapping counts **3780350** triples and it was uploaded on w3id of of STlab.
 
 
 ## 5. Deployement on Virtuoso - SPARQL Queries
@@ -137,15 +139,15 @@ In this project we have employed Fuseki for publishing our data on a SPARQL endp
 
 The high variety of types of indicators of soil consumption which are associated to each Place (C1,..,C125)  makes the output file of the size of almost 1 GB because it stores 3780350 triples.
 
-// triples in soil  
 
-### SPARQL queries
+<img src="image/triples in soil.png" alt="hi" class="inline"/>
+
+### 5.1 SPARQL queries
 
 Now we are going to implement some of the CQs as SPARQL queries
 
 
-
-#### CQ2: What are the values associated to a place’s collection? 
+#### 5.1.1 CQ2: What are the values associated to a place’s collection? 
 
 ```SPARQL
 PREFIX myont:<https://w3id.org/stlab/cascke/ontology/>
@@ -168,7 +170,7 @@ LIMIT 500
 
 We can see here that to each place is associated to a collection of values that measure some type of metric of soil consumption.
 
-#### CQ3: What metric describes the indicator? 
+#### 5.1.2 CQ3: What metric describes the indicator? 
 
 ```SPARQL
 PREFIX myont: <https://w3id.org/stlab/cascke/ontology/>
@@ -187,28 +189,30 @@ LIMIT 500
 ```
 <img src="image/CQ3.png" alt="hi" class="inline"/>
 
-In this query result set we can observe that an indicator is actually the conjunction of metric (on the left with respect to the underscore) and Place (on the right with respect to underscore). This design choice was made because when we refer to an indicator we want to capture a particular indicator in a specific place.
+In this query result set we can observe that an indicator is actually the conjunction of metric (on the left with respect to the underscore) and Place (on the right with respect to theunderscore). This design choice was made because when we refer to an indicator we want to capture a particular indicator in a specific place.
 
 
 ## 6. Ontology alignment(LIMES)
 
-Few of the classes in our ontology are actually present in the data produced by the mapping process, this is due the fact that classes encode very high level and general concepts our aim has been to achieve high reusability.
+Few of the classes in our ontology are actually present in the data produced by the mapping process, this is due the fact that classes encode very high level and general concepts our aim has been to achieve **high reusability**.
 
 Given the fact that a lot of classes aren't actually represented in the mapping of the data, very few classes can be aligned with common use ontologies such as **DBpedia**.
 
 Still, it has been possible to align the class **:Place** with the equivalent class in DBpedia.
 
 
-We have actually opted to align the class **:PopulatedPlace** which reduces the number of instances to look for in DBpedia, this has been done in order to reduce the computation time of the alignment, which would have been incredibly lengthy.
+We have actually opted to align the class **:PopulatedPlace** which reduces the number of instances to look for in DBpedia, this has been done in order to **reduce** the computation **time** of the alignment which would have been incredibly lengthy.
 
-We have realized the alignment by exploiting LIMES, a command line tool that can be configured through an XML file. It is possible to insert the information needed for the alignment by tuning some of the tags in the configuration file of LIMES, which we called **file.xml**.
+We have realized the alignment by exploiting **LIMES**, a command line tool that can be configured through an XML file. It is possible to insert the information needed for the alignment by tuning some of the tags in the configuration file of LIMES, which we called **file.xml**.
 
-In this document we specify the endpoint SPARQL of the **SOURCE** (Soil Consumption Ontology) and the **TARGET** (DBpedia) ontolgy. In this case the two are:
+In this document we specify the endpoint SPARQL of the **SOURCE** (Soil Consumption Ontology) and the **TARGET** (DBpedia) ontology. In this case the two are:
 
 * <http://localhost:3030/soil/sparql>
 * <http://dbpedia.org/sparql>
 
-### Relevant tags for the alignment in the configuration file
+### 6.1 Relevant tags for the alignment in the configuration file
+
+We can now analyze some of the relevant tags for understanding the alignment process:
 
 ```XML
 <PAGESIZE> 500000 </PAGESIZE> 
@@ -221,7 +225,7 @@ In this document we specify the endpoint SPARQL of the **SOURCE** (Soil Consumpt
 <METRIC> jaccard(s.name,t.name) </METRIC>
 ```
 
-* In this tag we specify the type of Link Specification to perform. In this case we have chosen the Jaccard index which is a statistic used for comparing the similarity and diversity of sample sets, is defined as the size of the intersection divided by the size of the union of the sample sets
+* In this tag we specify the type of Link Specification to perform. In this case we have chosen the **Jaccard index** which is a statistic used for comparing the similarity and diversity of sample sets, is defined as the size of the intersection divided by the size of the union of the sample sets
 
 ```XML
 <ACCEPTED_THRESHOLD> 0.9 </ACCEPTED_THRESHOLD> <!--default value is 0.98-->
@@ -287,7 +291,7 @@ We can see there is a bit of redundancies especially in the Places coming from t
 
 ### Conclusions
 
-* The data present in the csv files is not really comprehensive, thus the data  mapped from our ontolgy is not able to capture many of the classes we designed.
+* The data present in the csv files is not really comprehensive, thus the data  mapped from our ontology is not able to capture many of the classes we designed.
   * In order to be able to extract more knowledge the project would need to start from a better source of data.
 
 ### Future work
