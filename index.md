@@ -297,7 +297,7 @@ From this we can infer that there are some redundancies in the ontologies aligne
 
 * The data present in the csv files is not really comprehensive, thus the data  mapped from our ontology is not able to capture many of the classes we designed.
   * In order to be able to extract more knowledge the project would need to start from a better source of data.
-* 
+
 
 ### Future work
 
