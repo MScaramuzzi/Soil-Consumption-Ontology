@@ -283,7 +283,8 @@ SELECT (COUNT(*) as ?uniqueTargetPlace){
 
 ```
 
-<img src="image/target.png" alt="hi" class="inline"/
+<img src="image/target.png" alt="hi" class="inline"/>
+
 
 We can see that there are 1806 **unique** places aligned in the target ontology.
 
