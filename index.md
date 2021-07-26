@@ -268,6 +268,7 @@ SELECT (COUNT(*) as ?uniqueSourcePlaces){
 	}
 }
 ```
+
 <img src="image/unique-source-Places.png" alt="hi" class="inline"/>
 
 We can see that there are 1646 **unique** places in our ontology.
