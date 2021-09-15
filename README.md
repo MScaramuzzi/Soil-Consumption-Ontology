@@ -6,9 +6,9 @@ Output of RML mapping: [Zip file](https://liveunibo-my.sharepoint.com/personal/v
 
 ## Contents of the files in this repository:
 
-* rml-mapping.ttl: Code for the mapping of the CSV data into RDF triples
+* **rml-mapping.ttl**: Code for the mapping of the CSV data into RDF triples
 
-* soil-consumption-ontology.owl: Contains the developed ontology  
+* **soil-consumption-ontology.owl**: Contains the developed ontology  
 
-* soilc.zip: Csv data regarding soil consumption
+* **soilc.zip**: Csv data regarding soil consumption
   
