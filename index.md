@@ -256,12 +256,18 @@ From this we can infer that there are some redundancies in the ontologies aligne
 
 ## 8. Testing of the ontology
 
+...
+
 ### 8.1 SPARQL queries
 
 Now we are going to implement some of the CQs as SPARQL queries
 
 
 #### 8.1.1 CQ1: Which Place is referred by a certain IndicatorValue??
+
+By implementing CQ1 we want to test if each place has an associated value.
+
+In the first query we have used keyword *SAMPLE* to show that every place has at least one IndicatorValue associated to it.
 
 ```SPARQL
 PREFIX dbpo: <http://dbpedia.org/ontology/>
@@ -289,12 +295,8 @@ LIMIT 1000
 
 <img src="image/CQ1.png" alt="hi" class="inline"/>
 
-We can see here that to each place is associated to a collection of values that measure some type of metric of soil consumption.
 
-
-The keyword *SAMPLE* has been used in order to circumvent the problem of inner working of the DISTINCT keywords that function only when querying a single entity.
-
-In order to see every indicator value associated to every place the query would be the following.
+In order to see every indicator value associated to every place the query would be the following. LIMIT keyward was needed due to the size of the output, which would take a lot of time to compute.
 
 ```SPARQL
 PREFIX dbpo: <http://dbpedia.org/ontology/>
@@ -320,8 +322,11 @@ LIMIT 1000
 
 ###### Query for a place that is provided with a code for the "Provincia"
 
-What are the collections associated to a specific place named X?
+By implementing CQ4 we want to test that there is a collection of associated to each place.
 
+In the first query we test it on a place that is both a "Provincia" and a "Comune". We can see that the result sets is compliant with our expectations: there is a collection of Indicator Values that are associated to an unique place.
+
+As we can see there is a different set of values because the collections of measurments pertain two different entities.
 
 ```SPARQL
 PREFIX dbpo: <http://dbpedia.org/ontology/>
@@ -355,24 +360,18 @@ FILTER(?placeName = "Bari") }
 <img src="image/CQ4-Ostuni.png" alt="hi" class="inline"/>
 
 
-
-In this query result set we can observe that an indicator is actually the conjunction of metric (on the left with respect to the underscore) and Place (on the right with respect to theunderscore). This design choice was made because when we refer to an indicator we want to capture a particular indicator in a specific place.
-
 #### 8.1.3 CQ8: What are the collections associated to a specific place named X?
 
 ```SPARQL
 SELECT ?metric  ?definition
 WHERE {?metric a onto:Metric;
-                               rdfs:label ?definition}
-                              
+                               rdfs:label ?definition}                           
 ```
 
 
 <img src="image/CQ8.png" alt="hi" class="inline"/>
 
 
-
-In this query result set we can observe that an indicator is actually the conjunction of metric (on the left with respect to the underscore) and Place (on the right with respect to theunderscore). This design choice was made because when we refer to an indicator we want to capture a particular indicator in a specific place.
 
 
 #### 8.1.4 CQ9: What are the collections associated to a specific place named X?
@@ -383,9 +382,9 @@ WHERE {?metric a onto:Metric;
                                onto:hasAssociatedParameter ?parameter}
 ```
 
-<img src="image/C9.png" alt="hi" class="inline"/>
+<img src="image/CQ9.png" alt="hi" class="inline"/>
 
-In this query result set we can observe that an indicator is actually the conjunction of metric (on the left with respect to the underscore) and Place (on the right with respect to theunderscore). This design choice was made because when we refer to an indicator we want to capture a particular indicator in a specific place.
+
 
 ## 9. Conclusions and future work
 
