@@ -291,6 +291,31 @@ LIMIT 1000
 
 We can see here that to each place is associated to a collection of values that measure some type of metric of soil consumption.
 
+
+The keyword *SAMPLE* has been used in order to circumvent the problem of inner working of the DISTINCT keywords that function only when querying a single entity.
+
+In order to see every indicator value associated to every place the query would be the following.
+
+```SPARQL
+PREFIX dbpo: <http://dbpedia.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX my: <http://www.mobile.com/model/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX onto: <https://w3id.org/stlab/cascke/ontology/>
+
+SELECT ?place ?indicatorValue
+WHERE { ?placeCode  a onto:Place;
+                                       onto:isReferredBy ?indicatorValue;
+                                       onto:hasName ?place }
+
+LIMIT 1000
+```
+
+<img src="image/CQ1bis.png" alt="hi" class="inline"/>
+
 #### 8.1.2 CQ4: What are the collections associated to a specific place named X?
 
 ###### Query for a place that is provided with a code for the "Provincia"
@@ -343,7 +368,7 @@ WHERE {?metric a onto:Metric;
 ```
 
 
-<img src="image/CQ4-Ostuni.png" alt="hi" class="inline"/>
+<img src="image/CQ8.png" alt="hi" class="inline"/>
 
 
 
@@ -358,7 +383,7 @@ WHERE {?metric a onto:Metric;
                                onto:hasAssociatedParameter ?parameter}
 ```
 
-<img src="image/CQ4-Ostuni.png" alt="hi" class="inline"/>
+<img src="image/C9.png" alt="hi" class="inline"/>
 
 In this query result set we can observe that an indicator is actually the conjunction of metric (on the left with respect to the underscore) and Place (on the right with respect to theunderscore). This design choice was made because when we refer to an indicator we want to capture a particular indicator in a specific place.
 
