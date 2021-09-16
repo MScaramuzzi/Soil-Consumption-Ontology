@@ -2,12 +2,12 @@
 
 ## Abstract
 
+
 Soil consumption is a phenomenon associated with the loss of fundamental environmental assets, due to the artificial occupation of originally natural soil. This issue is being monitored by SNPA (*Sistema Nazionale per la Protezione dell’Ambiente*), and in recent years an ontology was published by ISPRA (*Istituto Superiore per la Protezione e la Ricerca Ambientale*). This work aims to be a refactor of that ontology, although with a different approach to the matter.​
 
 <!--ts-->
 
 <!--te-->
-
 
 
 ## 1. Introduction
@@ -18,17 +18,23 @@ The speed of land transformation recorded between 2017 and 2018 is maintained, i
 
 In this work we aimed to create an ontology which is inspired by the one that was made by ISPRA. The said ontology makes massive use of many different vocabularies and external ontologies. This leads to the Knowledge Graph, and thus the ontology itself, to be very complex to understand and at times inefficient. Our work, instead, has been focused on achieving **efficiency** by adopting a design strategy that would lead to **simplicity** and conciseness of the ontology.
 
-In this report we first briefly touch upon on related work that has been done in this field describing  how ISPRA-CORE is organized (***Section 2***). We then proceed to illustrate the ontology we designed by explaining the steps we have taken and also the issues that were encountered in order to formulate and formalize it. (***Section 3***).
+In this report we first briefly touch upon on related work that has been done in this field describing  how ISPRA-CORE is organized (***Section 2***).
 
-After the description of the development of the ontology, we describe the process of **mapping** a Resource Description Framework (RDF) graph into triples through RDF Mapping Language (RML) (***Section 4***).
+In ***Section 3*** we briefly analyze the characteristics and limitations of the available data and we illustrate how they were made available for the RML processing.
 
-Then in ***Section 5*** we explain how we have deployed the system on a SPARQL endpoint through Virtuoso. 
+We then proceed to illustrate the ontology we designed by explaining the design metodology we have employed and the patterns that were used.(***Section 4***).
 
-Subsequently we deal with the alignment of our ontology with general ontologies (DBpedia) n(***Section 6***). 
+After the description of the development of the ontology, we describe the process of **mapping** a Resource Description Framework (RDF) graph into triples through RDF Mapping Language (RML) (***Section 5***).
 
+Then in ***Section 6*** we explain how we have deployed the system on a SPARQL endpoint through Virtuoso.
 
+Subsequently we deal with the alignment of our ontology with general ontologies (DBpedia) (***Section 7***).
 
-After that, we present a way to implement the ontology, providing some examples of SPARQL queries relative to the SPARQL endpoint we published. The last section in the report deals with the conclusions related to this work and to draw upon for future steps that could be taken to expand and improve our work (***Section 7***).
+After that, we present a way to test the ontology through the use of the SPARQL endpoint we have published and also by making some test inside the Protégé enviroment
+(***Section 8***).
+
+The last section in the report deals with the conclusions related to this work and to draw upon for future steps that could be taken to expand and improve our work (***Section 9***).
+
 
 ## 2. Related Work
 
@@ -42,33 +48,41 @@ The datasets considered are related to the following matters:
 
 Clearly this kind of project has a broader grasp because it encompasses  different domains of interest, while our work is focused solely on soil consumption, allowing us to restrict the range of action and focusing on developing a **lighter** and simpler ontology which can function **autonomously**.
 
-## 3. Ontology
+## 3. Analysis of the data
+
+## 4. Ontology
 
 In the following section we provide the necessary steps we took in order to formulate and formalize the Soil Consumption Ontology.
 
-### 3.1 Design Methodology
+### 4.1 Design Methodology
 
-The main technique we used to develop the project was compliant with the norms and requirements of the eXtreme Design methodology. After studying the specific domain of soil consumption, we formulated various **Competency Questions** (CQs) that helped shape the ontology, followed by the application and usage of **Ontology Design Patterns** (ODPs) in order to overcome expressivity issues.
+The main technique we used to develop the project was compliant with the norms and requirements of the eXtreme Design methodology. After analyzing the data that was provided to us we formulated various **Competency Questions** (CQs) that helped shape the ontology, followed by the application and usage of **Logical** and **Content** **Ontology Design Patterns** (ODPs) in order to overcome expressivity issues.
 
-
-
-After testing and tuning various aspects of the ontology, we were finally able to complete it. Here are some examples of the CQs we used for modeling.
-
+After testing and tuning various aspects of the ontology, we were finally able to complete it. The CQs we used for modelingin are represented in  *Table 1*.
 
 
 | ID  | Competency Question                  |
 |-----|--------------------------------------|
-| CQ1 | What does an indicator describe?     |
-| CQ2 | What are the values associated to a place’s collection? |
-| CQ3 | What metric describes the indicator? |
-| CQ4 | What is the organization that provided the place's code?  |
-
+| CQ1 | Which Place is referred by a certain IndicatorValue?     |
+| CQ2 | What is the name of the place with code X? |
+| CQ3 | What are the collections associated to all the places? |
+| CQ4 | What are the collections associated to a specific place named X ?  |
+| CQ5 | What is the value of an indicatorValue X? |
+| CQ6 | To which collection does an indicatorValue X belong? |
+| CQ7 | What are the metrics for the indicators?  |
+| CQ8 | What does a metric X define?  |
+| CQ9 | What parameter is the metric X associated to?  |
+| CQ10 | What are the indicators?  |
+| CQ11 | What metric does an indicator have? |
+| CQ12 | Which are the parameters? |
+| CQ13 | What the  metrics and parameters associated to the indicator X? |
+| CQ14 | What the  metrics and parameters associated to the indicator X? |
 
  **Table 1** - *Competency Questions used for modeling the ontology*
 
 We were able to extrapolate a **snapshot** of the **domain** of **knowledge** described in our ontology by analyzing these CQs and we used it to generate our classes in a way that matched a precise description of the domain. We aimed to make explicit the semantic connections between the various entities that populate this domain and to represent the intrinsic meaning that these entities underlie.
 
-### 3.2 Ontology Description
+### 4.2 Ontology Description
 
 In the following figure we present the knowledge graph that represents classes and object properties that define our ontology:
 ​
@@ -94,8 +108,7 @@ The **:hasParameter** relation is necessary to equip an indicator with the parti
 Lastly, an indicator has :IndicatorValue, which itself is connected with a **:UnitOfMeasure**. There is a distinction to be made between **:Metric** and **:UnitOfMeasure** the former represents the general metric associated with an indicator, while the latter represents the particular unit of measure of the value which may be  a multiple or a submultiple of the metric associated with the indicator (if **:Metric** is meters, **:UnitOfMeasure** can be centimeter, kilometers etc.). This again, was done in order to provide reusability to the ontology: some applications in very different domains may need different magnitude of a unit of measures.
 
 
-
-## 4. Mapping rules and ontology publication(RML)
+## 5. Mapping rules and ontology publication(RML)
 
 In order to proceed for this step, the use of the pyRML python engine developed by Andrea Nuzzolese was necessary.
 
@@ -133,7 +146,7 @@ An example of a triple for this kind of mapping could be the following:
 This particular set of triples would be describing an indicator associated to the Municipality of Fabriano and its relative metric C2 that corresponds to non-consumed soil. In total, this mapping counts **3780350** triples and it was uploaded on w3id of of STlab.
 
 
-## 5. Deployment on Virtuoso - SPARQL Queries
+## 6. Deployment on Virtuoso - SPARQL Queries
 
 In this project we have employed Fuseki for publishing our data on a SPARQL endpoint. This choice was motivated by the ease of use of Fuseki.  We have loaded the data produced by the mapping (mapping_125.ttl) by using the User Interface provided by Fuseki.
 
@@ -142,57 +155,8 @@ The high variety of types of indicators of soil consumption which are associated
 
 <img src="image/triples in soil.png" alt="hi" class="inline"/>
 
-### 5.1 SPARQL queries
 
-Now we are going to implement some of the CQs as SPARQL queries
-
-
-#### 5.1.1 CQ2: What are the values associated to a place’s collection? 
-
-```SPARQL
-PREFIX myont:<https://w3id.org/stlab/cascke/ontology/>
-PREFIX dbpo: <http://dbpedia.org/ontology/>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX my: <http://www.mobile.com/model/>
-SELECT  *
-WHERE {
-  ?s   myont:hasCollection ?o
-}
-
-LIMIT 500
-```
-
-
-
-<img src="image/CQ2.png" alt="hi" class="inline"/>
-
-We can see here that to each place is associated to a collection of values that measure some type of metric of soil consumption.
-
-#### 5.1.2 CQ3: What metric describes the indicator? 
-
-```SPARQL
-PREFIX myont: <https://w3id.org/stlab/cascke/ontology/>
-PREFIX dbpo: <http://dbpedia.org/ontology/>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX my: <http://www.mobile.com/model/>
-SELECT  ?s 
-WHERE {
-  ?s  ?p myont:Indicator
-}
-
-LIMIT 500
-
-```
-<img src="image/CQ3.png" alt="hi" class="inline"/>
-
-In this query result set we can observe that an indicator is actually the conjunction of metric (on the left with respect to the underscore) and Place (on the right with respect to theunderscore). This design choice was made because when we refer to an indicator we want to capture a particular indicator in a specific place.
-
-
-## 6. Ontology alignment(LIMES)
+## 7. Ontology alignment(LIMES)
 
 Few of the classes in our ontology are actually present in the data produced by the mapping process, this is due the fact that classes encode very high level and general concepts our aim has been to achieve **high reusability**.
 
@@ -210,7 +174,7 @@ In this document we specify the endpoint SPARQL of the **SOURCE** (Soil Consumpt
 * <http://localhost:3030/soil/sparql>
 * <http://dbpedia.org/sparql>
 
-### 6.1 Relevant tags for the alignment in the configuration file
+### 7.1 Relevant tags for the alignment in the configuration file
 
 We can now analyze some of the relevant tags for understanding the alignment process:
 
@@ -239,11 +203,11 @@ After invokating Limes through the command line, this is the result of the align
 
 We can see that **1882** triples have been aligned.
 
-### 6.2 Alignment testing - SPARQL Queries
+### 7.2 Alignment testing - SPARQL Queries
 
 After we the alignment process we procedeed to upload the *accepted.nt* to Fuseki as a named-graph in order to test if the alignment process was successful. We have made two queries to test this.
 
-#### 6.2.1 Query 1
+#### 7.2.1 Query 1
 
 ```SPARQL
 SELECT *
@@ -255,7 +219,7 @@ WHERE {
 
 The first query is useful for getting a general look at the result set. There 1882 triples which are the contents of the accepted.nt file.
 
-#### 6.2.2 Query 2
+#### 7.2.2 Query 2
 
 Now we want to display, for example, the number of unique Places both in the source and in target ontology. The only relation in this file is the owl:sameAs.
 
@@ -290,17 +254,70 @@ We can see that there are 1806 **unique** places aligned in the target ontology.
 
 From this we can infer that there are some redundancies in the ontologies aligned, especially in the source ontology where there 1646 unique Places but there 1882 triples.
 
- 
-## 7. Conclusions and future work
+## 8. Testing of the ontology
+
+### 8.1 SPARQL queries
+
+Now we are going to implement some of the CQs as SPARQL queries
 
 
-### Conclusions
+#### 8.1.1 CQ1: Which Place is referred by a certain IndicatorValue??
+
+```SPARQL
+PREFIX onto:<https://w3id.org/stlab/cascke/ontology/>
+PREFIX dbpo: <http://dbpedia.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX my: <http://www.mobile.com/model/>
+SELECT   ?place (SAMPLE(?indicatorValue) as ?value)
+
+WHERE { ?placeCode  a onto:Place;
+                                       onto:isReferredBy ?indicatorValue;
+                                       onto:hasName ?place }    
+
+GROUP BY ?place
+ORDER BY ?place
+LIMIT 1000  
+```
+
+
+
+<img src="image/CQ2.png" alt="hi" class="inline"/>
+
+We can see here that to each place is associated to a collection of values that measure some type of metric of soil consumption.
+
+#### 8.1.2 CQ3: What metric describes the indicator? 
+
+```SPARQL
+PREFIX myont: <https://w3id.org/stlab/cascke/ontology/>
+PREFIX dbpo: <http://dbpedia.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX my: <http://www.mobile.com/model/>
+SELECT  ?s 
+WHERE {
+  ?s  ?p myont:Indicator
+}
+
+LIMIT 500
+
+```
+<img src="image/CQ3.png" alt="hi" class="inline"/>
+
+In this query result set we can observe that an indicator is actually the conjunction of metric (on the left with respect to the underscore) and Place (on the right with respect to theunderscore). This design choice was made because when we refer to an indicator we want to capture a particular indicator in a specific place.
+
+
+
+## 9. Conclusions and future work
+
+
+### 9.1 Conclusions
 
 * The data present in the csv files is not really comprehensive, thus the data  mapped from our ontology is not able to capture many of the classes we designed.
   * In order to be able to extract more knowledge the project would need to start from a better source of data.
 
+### 9.2 Future work
 
-### Future work
-
-* Fuseki should be substituted by a more powerful SPARQL Engine that like Virtuoso, for instance Fuseki becomes cumbersome and slow when dealing with a lot of triples.
-*  Our work has been deployed on our local machine, it should be tested on a remote server.
+...
