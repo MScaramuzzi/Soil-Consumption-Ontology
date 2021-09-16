@@ -264,12 +264,16 @@ Now we are going to implement some of the CQs as SPARQL queries
 #### 8.1.1 CQ1: Which Place is referred by a certain IndicatorValue??
 
 ```SPARQL
-PREFIX onto:<https://w3id.org/stlab/cascke/ontology/>
 PREFIX dbpo: <http://dbpedia.org/ontology/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX my: <http://www.mobile.com/model/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX onto: <https://w3id.org/stlab/cascke/ontology/>
+
+
 SELECT   ?place (SAMPLE(?indicatorValue) as ?value)
 
 WHERE { ?placeCode  a onto:Place;
@@ -283,32 +287,80 @@ LIMIT 1000
 
 
 
-<img src="image/CQ2.png" alt="hi" class="inline"/>
+<img src="image/CQ1.png" alt="hi" class="inline"/>
 
 We can see here that to each place is associated to a collection of values that measure some type of metric of soil consumption.
 
-#### 8.1.2 CQ3: What metric describes the indicator? 
+#### 8.1.2 CQ4: What are the collections associated to a specific place named X?
+
+###### Query for a place that is provided with a code for the "Provincia"
+
+What are the collections associated to a specific place named X?
+
 
 ```SPARQL
-PREFIX myont: <https://w3id.org/stlab/cascke/ontology/>
 PREFIX dbpo: <http://dbpedia.org/ontology/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX my: <http://www.mobile.com/model/>
-SELECT  ?s 
-WHERE {
-  ?s  ?p myont:Indicator
-}
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX onto: <https://w3id.org/stlab/cascke/ontology/>
 
-LIMIT 500
-
+SELECT ?collection ?placeCode 
+WHERE { ?placeCode a onto:Place;
+                              onto:hasCollection ?collection;
+                              onto:hasName ?placeName.
+FILTER(?placeName = "Bari") }
 ```
-<img src="image/CQ3.png" alt="hi" class="inline"/>
+
+<img src="image/CQ4-Bari.png" alt="hi" class="inline"/>
+
+###### Query for a place that is provided with only a code for the "Comune"
+
+```SPARQL
+SELECT ?collection ?placeCode
+WHERE { ?placeCode a onto:Place;
+                              onto:hasCollection ?collection;
+                              onto:hasName ?placeName.
+FILTER(?placeName = "Bari") }
+```
+
+<img src="image/CQ4-Ostuni.png" alt="hi" class="inline"/>
+
+
+
+In this query result set we can observe that an indicator is actually the conjunction of metric (on the left with respect to the underscore) and Place (on the right with respect to theunderscore). This design choice was made because when we refer to an indicator we want to capture a particular indicator in a specific place.
+
+#### 8.1.3 CQ8: What are the collections associated to a specific place named X?
+
+```SPARQL
+SELECT ?metric  ?definition
+WHERE {?metric a onto:Metric;
+                               rdfs:label ?definition}
+                              
+```
+
+
+<img src="image/CQ4-Ostuni.png" alt="hi" class="inline"/>
+
+
 
 In this query result set we can observe that an indicator is actually the conjunction of metric (on the left with respect to the underscore) and Place (on the right with respect to theunderscore). This design choice was made because when we refer to an indicator we want to capture a particular indicator in a specific place.
 
 
+#### 8.1.4 CQ9: What are the collections associated to a specific place named X?
+
+```SPARQL
+SELECT  ?metric ?parameter
+WHERE {?metric a onto:Metric;
+                               onto:hasAssociatedParameter ?parameter}
+```
+
+<img src="image/CQ4-Ostuni.png" alt="hi" class="inline"/>
+
+In this query result set we can observe that an indicator is actually the conjunction of metric (on the left with respect to the underscore) and Place (on the right with respect to theunderscore). This design choice was made because when we refer to an indicator we want to capture a particular indicator in a specific place.
 
 ## 9. Conclusions and future work
 
