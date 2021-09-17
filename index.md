@@ -30,7 +30,7 @@ Then in ***Section 6*** we explain how we have deployed the system on a SPARQL e
 
 Subsequently we deal with the alignment of our ontology with general ontologies (DBpedia) (***Section 7***).
 
-After that, we present a way to test the ontology through the use of the SPARQL endpoint we have published and also by making some test inside the Protégé enviroment
+After that, we present a way to test the ontology through the use of the SPARQL endpoint we have published and also by pursuing the testing endeavour inside the Protégé enviroment
 (***Section 8***).
 
 The last section in the report deals with the conclusions related to this work and to draw upon for future steps that could be taken to expand and improve our work (***Section 9***).
@@ -49,6 +49,8 @@ The datasets considered are related to the following matters:
 Clearly this kind of project has a broader grasp because it encompasses  different domains of interest, while our work is focused solely on soil consumption, allowing us to restrict the range of action and focusing on developing a **lighter** and simpler ontology which can function **autonomously**.
 
 ## 3. Analysis of the data
+
+The starting composition of the data was charactersized by four different csv tables, one for each administration unit (Nazione,Regione,Comune,Provincia), plus one additional csv table. The tables referred to the administration units contained data about the names and associated codes of each unit, along with 125 different indicators and their values. The other table contained information about the metrics and parameters referred to the indicators. It is important to underline the fact that there were two versions of the tables referred to the administration units, namely the version referred to the year 2012 and the one referred to the year 2015. Due to the lack of computational power, we preferred to utilize olny the data referred to the year 2012, in order to keep our dataset much lighter and workable. Another important note to take into account is the following: the design of the ontology started from this data, but we tried to generalize it, in order to make it as scalable as possible, so its use can be broader and directed also to other domains different from this one. An example of this methodology will be described in section 4.2. In order to make the process of RML mapping easier and faster, we merged the four tables into one big csv file, containing all informations about the different administration units.
 
 ## 4. Ontology
 
@@ -95,15 +97,17 @@ Figure 1 - **Knowledge Graph** DA CAMBIARE
 
 The two main classes in this graph are **:Indicator** and **:Place**. These two classes subtend the components we want to focus on our domain: measurements and geographical coordinates.
 
-Starting from the latter of the two, we can see that it was modeled by using the well-known Logical ODP N-ary relation in order to distinguish the various types of locations. This instantiation of the pattern has four subclasses represented by **:Nazione**, **:Regione**, **:Provincia**, **:Comune**, which are characterized by a hierarchical feature, determined by the Logical ODP **Transitive Reduction**. In particular, it is defined with two properties **:contains** and **:containsDirectly**, the former being transitive.
+Starting from the latter of the two, we have the **:Place** class, characterized by two main subclasses named  **:Geometry**, which is the first eaxmple of the generalization of the ontolgy (as this particular kind of data is not present) and **:AdministrationUnit**. The latter has four subclasses represented by **:Nazione**, **:Regione**, **:Provincia**, **:Comune** (characterized by a hierarchical feature, determined by the **Logical ODP Transitive Reduction**. In particular, it is defined with two properties **:contains** and **:containsDirectly**, the former being transitive).
 
-A **:PlaceCode** is associated to a **:Place**, and it can be released by any **:Organization** based on the country (ISTAT for Italy), this class was modeled in such a general way in order to make it independent of the country in which the ontology can be deployed on. An important feature of **:Place** is found in its **:Geometry**, which is a broader definition used to describe its geographical features which can vary from latitude and longitude to being a centroid, the specific implementation of this depends on how the **rdfs:Literal** is defined.
+A **:PlaceCode** is associated to a **:Place**, and it can be released by any **:Organization** based on the country (ISTAT for Italy), this class was modeled in such a general way in order to make it independent of the country in which the ontology can be deployed on. An important feature of **:Place** is found in its **:Geometry**, which is a broader definition used to describe its geographical features which can vary from latitude and longitude to being a centroid, the specific implementation of this depends on how the **wkt:geometry** is defined.
 
-To each **:Place** it is linked one or more **:Collection** of **:Indicator**. By using the Logical ODP **Property Chain**, if a **:Collection** is defined by a particular **:CollectionMetric**, the same metric is valid for the **:Indicator**, this feature is not meant to be used in our context, it is to generalize the ontology and facilitate its reuse in other similar domains of interest.
+To each **:Place** are linked one or more (existential) **:Collection** of **:Indicator**. Here it possible to witness the use of one **Content ODP**, used to link the two classes mentioned above, by the object properties **:hasMember** and **:isMemberOf** which are the **inverse** of one another.
 
-**:Indicator** itself is another application of the **N-ary relation** pattern. The rationale behind this choice is that we needed to model a process that involved many classes at the same time. Any entity of **:Indicator** is provided with a **:atTime** relation, connected to a **:TimeEntity** that could be either an **:Instant** or a time **:Interval**. This design choice was made because we wanted to generalize the concept of time related to a particular indicator. As it was explained in the previous paragraph, an indicator is provided with a **:Metric** that represents the general type of measure an indicator is associated with (could be hectares, percentage, square meters etc.).
+**:Indicator** itself is an application of the **N-ary relation** pattern. The rationale behind this choice is that we needed to model a process that involved many classes at the same time. Any entity of **:Indicator** is provided with a **:atTime** relation, connected to a **:TimeEntity** that could be either an **:Instant** or a time **:Interval**, where another **Content ODP** is used. This design choice was made because we wanted to generalize the concept of time related to a particular indicator, even if the data we used did not include this feature. 
 
-The **:hasParameter** relation is necessary to equip an indicator with the particular task it is used for (soil consumption, non-classified soil, inhabitants for hectare etc.), thus enabling to instantiate it to any application of the ontology by whomever aims to reuse it.
+An indicator is provided with a **:Metric** that represents the general type of measure an indicator is associated with, like soil consumption, non-classified soil, inhabitants for hectare and its relative unit of measure (could be hectares, percentage, square meters etc.). Something to be taken into account is that these relation are modelled after the **Observation Content Pattern**. 
+
+The **:hasAssociatedParameter** relation is necessary to equip a **:Metric** with the particular task it is used for, providing further information on what it is describing (e.g. soil consumed at 150 meters from coastal borders) , thus enabling to instantiate it to any application of the ontology by whomever aims to reuse it.
 
 Lastly, an indicator has :IndicatorValue, which itself is connected with a **:UnitOfMeasure**. There is a distinction to be made between **:Metric** and **:UnitOfMeasure** the former represents the general metric associated with an indicator, while the latter represents the particular unit of measure of the value which may be  a multiple or a submultiple of the metric associated with the indicator (if **:Metric** is meters, **:UnitOfMeasure** can be centimeter, kilometers etc.). This again, was done in order to provide reusability to the ontology: some applications in very different domains may need different magnitude of a unit of measures.
 
@@ -256,14 +260,81 @@ From this we can infer that there are some redundancies in the ontologies aligne
 
 ## 8. Testing of the ontology
 
-...
+The testing part of this project was divided in three points: Inference Verification, Error Provocation, CQ Verification.
+Inference Verification:
+During the development of the ontology on Protegè we checked the consistency of our project by running on of the reasoners provided by the desktop app, in our case it was HermiT 1.4.3.
+**immagine reasoner**
+ Whenever it revealed any inconsistency we corrected it, in order to make our ontology consistent.
+Error Provocation:
+Another important part of the testing process is to verify that any purposely wrong input in the ontology is correctly discovered. This is done also in Protegè, by creating an individual that does not follow the rules or axioms of the ontology. As an example, we tried to give as an input an individual that had all the characteristics of an Indicator, but marked it as a Parameter. When running HermiT, the flaw was correctly spotted.
+**MARCO METTI IMMAGINE ERR_PROV**
+As it ca be seen, the reasoner correctly spotted the error, meaning that the proper disjointess axiom was implemented.
+
+CQ Verification:
+CQ verification consists in testing whether the ontology vocabulary allows to convert a CQ to a SPARQL query. Thanks to this kind of testing we denoted some flaws in our data and vocabulary, that were soon after corrected.
 
 ### 8.1 SPARQL queries
 
 Now we are going to implement some of the CQs as SPARQL queries
 
 
-#### 8.1.1 CQ1: Which Place is referred by a certain IndicatorValue??
+#### 8.1.1 CQ1: What are the collections associated to a specific place named X?
+
+```SPARQL
+SELECT ?metric  ?definition
+WHERE {?metric a onto:Metric;
+                               rdfs:label ?definition}                           
+```
+
+
+<img src="image/CQ8.png" alt="hi" class="inline"/>
+
+
+
+
+#### 8.1.2 CQ4: What are the collections associated to a specific place named X?
+
+###### Query for a place that is provided with a code for the "Provincia"
+
+By implementing CQ4 we want to test that there is a collection of associated to each place.
+
+In the first query we test it on a place that is both a "Provincia" and a "Comune". We can see that the result sets is compliant with our expectations: there is a collection of Indicator Values that are associated to an unique place.
+
+As we can see there is a different set of values because the collections of measurments pertain two different entities.
+
+```SPARQL
+PREFIX dbpo: <http://dbpedia.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX my: <http://www.mobile.com/model/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX onto: <https://w3id.org/stlab/cascke/ontology/>
+
+SELECT ?collection ?placeCode 
+WHERE { ?placeCode a onto:Place;
+                              onto:hasCollection ?collection;
+                              onto:hasName ?placeName.
+FILTER(?placeName = "Bari") }
+```
+
+<img src="image/CQ4-Bari.png" alt="hi" class="inline"/>
+
+###### Query for a place that is provided with only a code for the "Comune"
+
+```SPARQL
+SELECT ?collection ?placeCode
+WHERE { ?placeCode a onto:Place;
+                              onto:hasCollection ?collection;
+                              onto:hasName ?placeName.
+FILTER(?placeName = "Bari") }
+```
+
+<img src="image/CQ4-Ostuni.png" alt="hi" class="inline"/>
+
+
+#### 8.1.3 CQ8: Which Place is referred by a certain IndicatorValue??
 
 By implementing CQ1 we want to test if each place has an associated value.
 
@@ -318,59 +389,6 @@ LIMIT 1000
 
 <img src="image/CQ1bis.png" alt="hi" class="inline"/>
 
-#### 8.1.2 CQ4: What are the collections associated to a specific place named X?
-
-###### Query for a place that is provided with a code for the "Provincia"
-
-By implementing CQ4 we want to test that there is a collection of associated to each place.
-
-In the first query we test it on a place that is both a "Provincia" and a "Comune". We can see that the result sets is compliant with our expectations: there is a collection of Indicator Values that are associated to an unique place.
-
-As we can see there is a different set of values because the collections of measurments pertain two different entities.
-
-```SPARQL
-PREFIX dbpo: <http://dbpedia.org/ontology/>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX my: <http://www.mobile.com/model/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
-PREFIX onto: <https://w3id.org/stlab/cascke/ontology/>
-
-SELECT ?collection ?placeCode 
-WHERE { ?placeCode a onto:Place;
-                              onto:hasCollection ?collection;
-                              onto:hasName ?placeName.
-FILTER(?placeName = "Bari") }
-```
-
-<img src="image/CQ4-Bari.png" alt="hi" class="inline"/>
-
-###### Query for a place that is provided with only a code for the "Comune"
-
-```SPARQL
-SELECT ?collection ?placeCode
-WHERE { ?placeCode a onto:Place;
-                              onto:hasCollection ?collection;
-                              onto:hasName ?placeName.
-FILTER(?placeName = "Bari") }
-```
-
-<img src="image/CQ4-Ostuni.png" alt="hi" class="inline"/>
-
-
-#### 8.1.3 CQ8: What are the collections associated to a specific place named X?
-
-```SPARQL
-SELECT ?metric  ?definition
-WHERE {?metric a onto:Metric;
-                               rdfs:label ?definition}                           
-```
-
-
-<img src="image/CQ8.png" alt="hi" class="inline"/>
-
 
 
 
@@ -417,7 +435,6 @@ WHERE {?parameter a onto:Parameter}
 <img src="image/CQ12.png" alt="hi" class="inline"/>
 
 ## 9. Conclusions and future work
-
 
 
 ### 9.1 Conclusions
