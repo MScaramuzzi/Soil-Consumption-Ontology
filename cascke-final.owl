@@ -1,0 +1,830 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://w3id.org/stlab/cascke/ontology/onto"
+     xml:base="https://w3id.org/stlab/cascke/ontology/onto"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:ontology="https://w3id.org/stlab/cascke/ontology/#"
+     xmlns:soil-consumption-ontology="http://www.semanticweb.org/ale/ontologies/2021/5/soil-consumption-ontology#">
+    <owl:Ontology rdf:about="https://w3id.org/stlab/cascke/ontology/"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#date -->
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#date"/>
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#gDay -->
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#gDay"/>
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#gMonth -->
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#gMonth"/>
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#gYear -->
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#gYear"/>
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#gYearMonth -->
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#gYearMonth"/>
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#time -->
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#time"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#atTime -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#atTime">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Indicator"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#TimeEntity"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#contains -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#contains">
+        <owl:inverseOf rdf:resource="https://w3id.org/stlab/cascke/ontology/#isContained"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+        <rdfs:comment>viene utlizzato il logical ODP transitive reduction</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#directlyContains -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#directlyContains">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/stlab/cascke/ontology/#contains"/>
+        <owl:inverseOf rdf:resource="https://w3id.org/stlab/cascke/ontology/#isDirectlyContained"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+        <rdfs:comment>viene utlizzato il logical ODP transitive reduction</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#hasAssociatedParameter -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#hasAssociatedParameter">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Metric"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#Parameter"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#hasCMetric -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#hasCMetric">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Collection"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#CollectionMetric"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#hasCollection -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#hasCollection">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#Collection"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#hasGeometry -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#hasGeometry">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#Geometry"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#hasIndicatorCode -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#hasIndicatorCode">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Indicator"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#IndicatorCode"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#hasIndicatorValue -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#hasIndicatorValue">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Indicator"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#IndicatorValue"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#hasMember -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#hasMember">
+        <owl:inverseOf rdf:resource="https://w3id.org/stlab/cascke/ontology/#isMemberOf"/>
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Collection"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#Indicator"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#hasMetric -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#hasMetric">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Indicator"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#Metric"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#hasPlaceCode -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#hasPlaceCode">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#PlaceCode"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#hasUnitOfMeasure -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#hasUnitOfMeasure">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#IndicatorValue"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#UnitOfMeasure"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#isContained -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#isContained">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#isDirectlyContained -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#isDirectlyContained">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/stlab/cascke/ontology/#isContained"/>
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#isMemberOf -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#isMemberOf">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Indicator"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#Collection"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#isReferredBy -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#isReferredBy">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#IndicatorValue"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#isReleasedBy -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#isReleasedBy">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#PlaceCode"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#Organization"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#parametrises -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#parametrises">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Parameter"/>
+        <rdfs:range rdf:resource="https://w3id.org/stlab/cascke/ontology/#IndicatorValue"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/endTime -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/stlab/cascke/ontology/endTime">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/stlab/cascke/ontology/hasTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/hasTime -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/stlab/cascke/ontology/hasTime">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Interval"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#date"/>
+                    <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#dateTime"/>
+                    <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#gDay"/>
+                    <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#gMonth"/>
+                    <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#gYear"/>
+                    <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#gYearMonth"/>
+                    <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#time"/>
+                </owl:unionOf>
+            </rdfs:Datatype>
+        </rdfs:range>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/startTime -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/stlab/cascke/ontology/startTime">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/stlab/cascke/ontology/hasTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#hasGeoProperty -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#hasGeoProperty">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Geometry"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#hasName -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#hasName">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#Name"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#value -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/stlab/cascke/ontology/#value">
+        <rdfs:domain rdf:resource="https://w3id.org/stlab/cascke/ontology/#IndicatorValue"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ale/ontologies/2021/8/untitled-ontology-35#UnitaAmministrativa -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ale/ontologies/2021/8/untitled-ontology-35#UnitaAmministrativa">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+        <owl:disjointWith rdf:resource="https://w3id.org/stlab/cascke/ontology/#Geometry"/>
+        <rdfs:comment>Unità amministrative</rdfs:comment>
+        <rdfs:label>AdministrativeUnit</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#Collection -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#Collection">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/#hasCMetric"/>
+                <owl:someValuesFrom rdf:resource="https://w3id.org/stlab/cascke/ontology/#CollectionMetric"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/#hasMember"/>
+                <owl:someValuesFrom rdf:resource="https://w3id.org/stlab/cascke/ontology/#Indicator"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">Class that contains the collection of values relative to the  places</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe di collezione di valori, viene utilizzato il content pattern relativo, associato a Indicator</rdfs:comment>
+        <rdfs:label xml:lang="en">Collection</rdfs:label>
+        <rdfs:label xml:lang="it">Collezione</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#CollectionMetric -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#CollectionMetric">
+        <rdfs:comment xml:lang="en">Class of the metric of the collection</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe di metrica della collezione</rdfs:comment>
+        <rdfs:label xml:lang="en">CollectionMetric</rdfs:label>
+        <rdfs:label xml:lang="it">CollectionMetric</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#Comune -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#Comune">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ale/ontologies/2021/8/untitled-ontology-35#UnitaAmministrativa"/>
+        <rdfs:comment xml:lang="en">Class of the municipalities</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe dei comuni</rdfs:comment>
+        <rdfs:label xml:lang="it">Comune</rdfs:label>
+        <rdfs:label xml:lang="en">Municipality</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#Geometry -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#Geometry">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/stlab/cascke/ontology/#Place"/>
+        <rdfs:comment xml:lang="en">Class of the geometry of the place (centroid, coordinates etc.)</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe di geometria dei luoghi (centroide, coordinate etc.)</rdfs:comment>
+        <rdfs:label xml:lang="it">Geometria</rdfs:label>
+        <rdfs:label xml:lang="en">Geometry</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#Indicator -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#Indicator">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/#hasIndicatorValue"/>
+                <owl:someValuesFrom rdf:resource="https://w3id.org/stlab/cascke/ontology/#IndicatorValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/#hasMetric"/>
+                <owl:someValuesFrom rdf:resource="https://w3id.org/stlab/cascke/ontology/#Metric"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/#atTime"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/stlab/cascke/ontology/#TimeEntity"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/#hasIndicatorCode"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/stlab/cascke/ontology/#IndicatorCode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/#isMemberOf"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/stlab/cascke/ontology/#Collection"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:hasKey rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#atTime"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#hasIndicatorCode"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#hasMetric"/>
+        </owl:hasKey>
+        <rdfs:comment xml:lang="it">Questa è la classe degli indicatori, rappresenta una n-ary relation.
+La key è formata da atTime,hasIndicatorCode e hasMetric.</rdfs:comment>
+        <rdfs:comment xml:lang="en">This is the class for the indicators</rdfs:comment>
+        <rdfs:label xml:lang="en">Indicator</rdfs:label>
+        <rdfs:label xml:lang="it">Indicatore</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#IndicatorCode -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#IndicatorCode">
+        <rdfs:comment xml:lang="en">Class of the code associated to the indicator</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe del codice dell&apos;indicatore</rdfs:comment>
+        <rdfs:label xml:lang="en">IndicatorCode</rdfs:label>
+        <rdfs:label xml:lang="it">IndicatorCode</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#IndicatorValue -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#IndicatorValue">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/#hasUnitOfMeasure"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/stlab/cascke/ontology/#UnitOfMeasure"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">Class of the values of the indicators</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe del valore dell&apos;indicatore</rdfs:comment>
+        <rdfs:label xml:lang="en">IndicatorValue</rdfs:label>
+        <rdfs:label xml:lang="it">IndicatorValue</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#Instant -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#Instant">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/stlab/cascke/ontology/#TimeEntity"/>
+        <rdfs:comment xml:lang="en">Class of the instants</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe degli istanti</rdfs:comment>
+        <rdfs:label xml:lang="en">Instant</rdfs:label>
+        <rdfs:label xml:lang="it">Istante</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#Interval -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#Interval">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/stlab/cascke/ontology/#TimeEntity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/hasTime"/>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/endTime"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/startTime"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">Class of the  intervals</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe degli intervalli, viene utilizzato il content pattern</rdfs:comment>
+        <rdfs:label xml:lang="en">Interval</rdfs:label>
+        <rdfs:label xml:lang="it">Intervallo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#Metric -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#Metric">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/#hasAssociatedParameter"/>
+                <owl:someValuesFrom rdf:resource="https://w3id.org/stlab/cascke/ontology/#Parameter"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">Class of the metric of the indicator</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe della metrica dell&apos;indicatore, la struttura è quella dell&apos;observation content pattern</rdfs:comment>
+        <rdfs:label xml:lang="en">Metric</rdfs:label>
+        <rdfs:label xml:lang="it">Metrica</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#Nazione -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#Nazione">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ale/ontologies/2021/8/untitled-ontology-35#UnitaAmministrativa"/>
+        <rdfs:comment xml:lang="en">Class of the nations</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe delle nazioni</rdfs:comment>
+        <rdfs:label xml:lang="en">Nation</rdfs:label>
+        <rdfs:label xml:lang="it">Nazione</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#Organization -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#Organization">
+        <rdfs:comment xml:lang="en">Class of the organization that releases the place&apos;s code</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe dell&apos;organizzazione che emette il codice del luogo</rdfs:comment>
+        <rdfs:label xml:lang="en">Organization</rdfs:label>
+        <rdfs:label xml:lang="it">Organizzazione</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#Parameter -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#Parameter">
+        <rdfs:comment xml:lang="en">Class of the parameter associated to the indicator</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe del parametro dell&apos;indicatore</rdfs:comment>
+        <rdfs:label xml:lang="en">Parameter</rdfs:label>
+        <rdfs:label xml:lang="it">Parametro</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#Place -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#Place">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/#hasPlaceCode"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/stlab/cascke/ontology/#PlaceCode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/#hasGeometry"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/stlab/cascke/ontology/#Geometry"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/#hasName"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#Name"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:hasKey rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#hasGeometry"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#hasPlaceCode"/>
+        </owl:hasKey>
+        <rdfs:comment xml:lang="en">Class of the places</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe dei luoghi</rdfs:comment>
+        <rdfs:label xml:lang="it">Luogo</rdfs:label>
+        <rdfs:label xml:lang="en">Place</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#PlaceCode -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#PlaceCode">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/stlab/cascke/ontology/#isReleasedBy"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/stlab/cascke/ontology/#Organization"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">Class containing the codes of the places</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe dei codici dei luoghi</rdfs:comment>
+        <rdfs:label xml:lang="en">PlaceCode</rdfs:label>
+        <rdfs:label xml:lang="it">PlaceCode</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#Provincia -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#Provincia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ale/ontologies/2021/8/untitled-ontology-35#UnitaAmministrativa"/>
+        <rdfs:comment xml:lang="en">Class of the provinces</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe delle provincie</rdfs:comment>
+        <rdfs:label xml:lang="en">Province</rdfs:label>
+        <rdfs:label xml:lang="it">Provincia</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#Regione -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#Regione">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ale/ontologies/2021/8/untitled-ontology-35#UnitaAmministrativa"/>
+        <rdfs:comment xml:lang="en">Class of the regions</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe delle regioni</rdfs:comment>
+        <rdfs:label xml:lang="en">Region</rdfs:label>
+        <rdfs:label xml:lang="it">Regione</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#TimeEntity -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#TimeEntity">
+        <rdfs:comment xml:lang="en">Class of the time entities</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe delle entità temporali</rdfs:comment>
+        <rdfs:label xml:lang="en">TimeEntity</rdfs:label>
+        <rdfs:label xml:lang="it">TimeEntity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/#UnitOfMeasure -->
+
+    <owl:Class rdf:about="https://w3id.org/stlab/cascke/ontology/#UnitOfMeasure">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/stlab/cascke/ontology/#Interval"/>
+        <rdfs:comment xml:lang="en">Class of the unit of measure</rdfs:comment>
+        <rdfs:comment xml:lang="it">Classe delle unità di misura</rdfs:comment>
+        <rdfs:label xml:lang="en">UnitOfMeasure</rdfs:label>
+        <rdfs:label xml:lang="it">UnitOfMeasure</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/C1 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/stlab/cascke/ontology/C1">
+        <rdf:type rdf:resource="https://w3id.org/stlab/cascke/ontology/#Metric"/>
+        <ontology:hasAssociatedParameter rdf:resource="https://w3id.org/stlab/cascke/ontology/&apos;Suolo_utilizzato_a_100m_dalla_costa&apos;"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/C2 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/stlab/cascke/ontology/C2">
+        <rdf:type rdf:resource="https://w3id.org/stlab/cascke/ontology/#Metric"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/ISTAT -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/stlab/cascke/ontology/ISTAT">
+        <rdf:type rdf:resource="https://w3id.org/stlab/cascke/ontology/#Organization"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/bologna -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/stlab/cascke/ontology/bologna">
+        <rdf:type rdf:resource="https://w3id.org/stlab/cascke/ontology/#Comune"/>
+        <ontology:hasPlaceCode rdf:resource="https://w3id.org/stlab/cascke/ontology/100"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/&apos;Suolo_utilizzato_a_100m_dalla_costa&apos; -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/stlab/cascke/ontology/&apos;Suolo_utilizzato_a_100m_dalla_costa&apos;">
+        <rdf:type rdf:resource="https://w3id.org/stlab/cascke/ontology/#Parameter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/100 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/stlab/cascke/ontology/100">
+        <rdf:type rdf:resource="https://w3id.org/stlab/cascke/ontology/#PlaceCode"/>
+        <ontology:isReleasedBy rdf:resource="https://w3id.org/stlab/cascke/ontology/ISTAT"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/100_C1 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/stlab/cascke/ontology/100_C1">
+        <rdf:type rdf:resource="https://w3id.org/stlab/cascke/ontology/#Indicator"/>
+        <ontology:hasIndicatorValue rdf:resource="https://w3id.org/stlab/cascke/ontology/66508"/>
+        <ontology:hasMetric rdf:resource="https://w3id.org/stlab/cascke/ontology/C1"/>
+        <ontology:isMemberOf rdf:resource="https://w3id.org/stlab/cascke/ontology/26,9;44;105;665,08"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/100_C2 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/stlab/cascke/ontology/100_C2">
+        <ontology:hasIndicatorValue rdf:resource="https://w3id.org/stlab/cascke/ontology/445"/>
+        <ontology:hasMetric rdf:resource="https://w3id.org/stlab/cascke/ontology/C2"/>
+        <ontology:isMemberOf rdf:resource="https://w3id.org/stlab/cascke/ontology/26,9;44;105;665,08"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/26,9;44;105;665,08 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/stlab/cascke/ontology/26,9;44;105;665,08">
+        <rdf:type rdf:resource="https://w3id.org/stlab/cascke/ontology/#Collection"/>
+        <ontology:hasMember rdf:resource="https://w3id.org/stlab/cascke/ontology/100_C1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/445 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/stlab/cascke/ontology/445">
+        <rdf:type rdf:resource="https://w3id.org/stlab/cascke/ontology/#IndicatorValue"/>
+        <ontology:value rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">44,5</ontology:value>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/stlab/cascke/ontology/66508 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/stlab/cascke/ontology/66508">
+        <rdf:type rdf:resource="https://w3id.org/stlab/cascke/ontology/#IndicatorValue"/>
+        <ontology:value rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">665,08</ontology:value>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#Collection"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#CollectionMetric"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#Indicator"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#IndicatorCode"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#IndicatorValue"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#Metric"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#Organization"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#Parameter"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#Place"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#PlaceCode"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#TimeEntity"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#Comune"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#Nazione"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#Regione"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#Nazione"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#Provincia"/>
+            <rdf:Description rdf:about="https://w3id.org/stlab/cascke/ontology/#Regione"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
