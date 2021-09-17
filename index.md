@@ -90,7 +90,7 @@ In the following figure we present the knowledge graph that represents classes a
 <img src="image/soil-consumption-knowledge-graph.png
 " alt="hi"/>
 
-Figure 1 - **Knowledge Graph**
+Figure 1 - **Knowledge Graph** DA CAMBIARE
 
 
 The two main classes in this graph are **:Indicator** and **:Place**. These two classes subtend the components we want to focus on our domain: measurements and geographical coordinates.
@@ -385,6 +385,36 @@ WHERE {?metric a onto:Metric;
 <img src="image/CQ9.png" alt="hi" class="inline"/>
 
 
+#### 8.1.4 CQ9: What are the collections associated to a specific place named X?
+
+```SPARQL
+SELECT  ?metric ?parameter
+WHERE {?metric a onto:Metric;
+                               onto:hasAssociatedParameter ?parameter}
+```
+
+<img src="image/CQ9.png" alt="hi" class="inline"/>
+
+
+#### 8.1.4 CQ9: What are the collections associated to a specific place named X?
+
+```SPARQL
+SELECT  ?indicator ?metric
+WHERE {?indicator a onto:Indicator;
+                                   onto:hasMetric ?metric}
+```
+
+<img src="image/CQ11.png" alt="hi" class="inline"/>
+
+
+#### 8.1.4 CQ9: What are the collections associated to a specific place named X?
+
+```SPARQL
+SELECT  ?parameter
+WHERE {?parameter a onto:Parameter}
+```
+
+<img src="image/CQ12.png" alt="hi" class="inline"/>
 
 ## 9. Conclusions and future work
 
