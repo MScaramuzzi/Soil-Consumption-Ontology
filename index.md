@@ -1,5 +1,10 @@
 # Knowledge Engineering Report
 
+Link to the folders containing relevant files:
+
+ * ![hi](https://liveunibo-my.sharepoint.com/personal/valentina_presutti_unibo_it/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9saXZldW5pYm8tbXkuc2hhcmVwb2ludC5jb20vOmY6L2cvcGVyc29uYWwvdmFsZW50aW5hX3ByZXN1dHRpX3VuaWJvX2l0L0V2TTgwRVQzWHc1UHNvNjBQY3pkT0pBQkFWYzFFNlF0amNBSTRMQVZUOXdiTkE%5FcnRpbWU9TXBfNVpzTDUyRWc&id=%2Fpersonal%2Fvalentina%5Fpresutti%5Funibo%5Fit%2FDocuments%2FTeaching%2FKnowledgeEngineering%2FProjects%2FProject4%2D%20SoilConsumption%2FCal%C3%B2%2DScaramuzzi "Onedrive folder")
+ * ![hi](https://github.com/MScaramuzzi/Soil-Consumption-Ontology "Github folder"
+
 ## Abstract
 
 
@@ -35,7 +40,6 @@ After that, we present a way to test the ontology through the use of the SPARQL 
 
 The last section in the report deals with the conclusions related to this work and to draw upon for future steps that could be taken to expand and improve our work (***Section 9***).
 
-
 ## 2. Related Work
 
 Linked ISPRA is a pilot project for the development and use of methodologies aimed at the production and publication of Linked Open Data according to the standards set by the World Wide Web Consortium (W3C). The objective is to develop a process for the production of Linked Open Data (LOD) starting from a significant set of datasets, aimed at creating an internal expertise on the methodology of publication (RDF framework).
@@ -56,7 +60,7 @@ The four tables referred to the administration units contained data about the na
 
 The other table contained information about the metrics and parameters referred to the indicators. It is important to underline the fact that there were two versions of the tables referred to the administration units, namely the version referred to the year 2012 and the one referred to the year 2015. Due to the lack of computational power, we preferred to utilize only the data referred to the year 2012, in order to keep our **dataset** much **lighter** and easy to work with. 
 
-Another important note to take into account is the following: the design of the ontology started from this data, but we tried to generalize it, in order to make it as scalable as possible, so its use can be broader and directed also to other domains different from this one. An example of this methodology will be described in section 4.2. 
+Another important note to take into account is the following: the design of the ontology started from this data, but we tried to generalize it, in order to make it as scalable as possible, so its use can be broader and directed also to other domains different from this one. An example of this methodology will be described in section 4.2.
 
 In order to make the process of RML mapping easier and faster, we merged the four tables into **one csv** file of considerable size, containing all informations about the different administration units.
 
@@ -88,7 +92,7 @@ After testing and tuning various aspects of the ontology, we were finally able t
 | CQ13 | What the  metrics and parameters associated to the indicator X? |
 | CQ14 | What the  metrics and parameters associated to the indicator X? |
 
- **Table 1** - *Competency Questions used for modeling the ontology*
+ *Table 1* - **Competency Questions used for modeling the ontology**
 
 We were able to extrapolate a **snapshot** of the **domain** of **knowledge** described in our ontology by analyzing these CQs and we used it to generate our classes in a way that matched a precise description of the domain. We aimed to make explicit the semantic connections between the various entities that populate this domain and to represent the intrinsic meaning that these entities underlie.
 
@@ -139,7 +143,7 @@ The following is an extract of the RML, specifically the part relative to the tr
  
 <img src="image/rml.png" alt="hi" class="inline"/>
 
-Figure 2 - **Code for RML extraction of data**
+*Figure 2* - **Code for RML extraction of data**
 
 
 In this figure, other than the already mentioned python function injection that opens at line 100 and closes at line 115 denoted by the curly brackets, it possible to notice how the class of the indicators was mapped.
@@ -270,16 +274,15 @@ From this we can infer that there are some redundancies in the ontologies aligne
 ## 8. Testing of the ontology
 
 The testing part of this project was divided in three steps:
+
 1.**CQs Verification**  
 2. **Inference Verification**
 3. **Error Provocation**
 
 
-
 ### 8.1 CQs through SPARQL queries
 
 CQs verification consists in testing whether the ontology vocabulary allows to convert a CQs to a SPARQL query. Thanks to this kind of testing we denoted some flaws in our data and vocabulary, that were soon after corrected.
-
 
 #### 8.1.1 CQ1: What are the collections associated to a specific place named X?
 
@@ -466,4 +469,3 @@ Further works could include the usage of new key data, for example including als
 
 More generally, accessing bigger datasets would enable us to utilize our ontology in a more extensive way.
 Following the same thought process, the ontology could be used to represent other domains that share the same characteristics of the one we worked on.  
-
