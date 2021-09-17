@@ -409,7 +409,7 @@ WHERE {?metric a onto:Metric;
 
 
 
-#### 8.1.5 CQ11: What metric does an indicator have?
+#### 8.1.5 **CQ11: What is the metric of an indicator X?**
 
 ```SPARQL
 SELECT  ?indicator ?metric
