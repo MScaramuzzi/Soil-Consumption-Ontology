@@ -260,18 +260,10 @@ From this we can infer that there are some redundancies in the ontologies aligne
 
 ## 8. Testing of the ontology
 
-The testing part of this project was divided in three points: Inference Verification, Error Provocation, CQ Verification.
-Inference Verification:
-During the development of the ontology on Protegè we checked the consistency of our project by running on of the reasoners provided by the desktop app, in our case it was HermiT 1.4.3.
-**immagine reasoner**
- Whenever it revealed any inconsistency we corrected it, in order to make our ontology consistent.
-Error Provocation:
-Another important part of the testing process is to verify that any purposely wrong input in the ontology is correctly discovered. This is done also in Protegè, by creating an individual that does not follow the rules or axioms of the ontology. As an example, we tried to give as an input an individual that had all the characteristics of an Indicator, but marked it as a Parameter. When running HermiT, the flaw was correctly spotted.
-**MARCO METTI IMMAGINE ERR_PROV**
-As it ca be seen, the reasoner correctly spotted the error, meaning that the proper disjointess axiom was implemented.
-
-CQ Verification:
-CQ verification consists in testing whether the ontology vocabulary allows to convert a CQ to a SPARQL query. Thanks to this kind of testing we denoted some flaws in our data and vocabulary, that were soon after corrected.
+The testing part of this project was divided in three steps:
+1.**CQ Verification**  
+2. **Inference Verification**
+3. **Error Provocation**
 
 ### 8.1 SPARQL queries
 
@@ -414,7 +406,7 @@ WHERE {?metric a onto:Metric;
 <img src="image/CQ9.png" alt="hi" class="inline"/>
 
 
-#### 8.1.4 CQ9: What are the collections associated to a specific place named X?
+#### 8.1.4 CQ11: Fill XXX
 
 ```SPARQL
 SELECT  ?indicator ?metric
@@ -425,7 +417,7 @@ WHERE {?indicator a onto:Indicator;
 <img src="image/CQ11.png" alt="hi" class="inline"/>
 
 
-#### 8.1.4 CQ9: What are the collections associated to a specific place named X?
+#### 8.1.4 CQ12: Fill XXX
 
 ```SPARQL
 SELECT  ?parameter
@@ -434,8 +426,37 @@ WHERE {?parameter a onto:Parameter}
 
 <img src="image/CQ12.png" alt="hi" class="inline"/>
 
-## 9. Conclusions and future work
 
+
+#### 8.2 Inference Verification
+
+During the development of the ontology on Protégé we checked the consistency of our project by running on of the reasoners provided by the desktop app, in our case it was HermiT 1.4.3.
+
+
+**immagine reasoner**
+
+
+ Whenever it revealed any inconsistency we corrected it, in order to make our ontology consistent.
+
+
+### 8.3 Error Provocation
+
+Another important part of the testing process is to verify that any purposely wrong input in the ontology is correctly discovered. This is done also in Protegè, by creating an individual that does not follow the rules or axioms of the ontology. As an example, we tried to give as an input an individual that had all the characteristics of an Indicator, but marked it as a Parameter. When running HermiT, the flaw was correctly spotted.
+
+
+Figure x - **Error provocation test** 
+
+<img src="image/err_prov.png" alt="hi" class="inline"/>
+
+
+
+As it ca be seen, the reasoner correctly spotted the error, meaning that the proper disjointess axiom was implemented.
+
+CQ Verification:
+CQ verification consists in testing whether the ontology vocabulary allows to convert a CQ to a SPARQL query. Thanks to this kind of testing we denoted some flaws in our data and vocabulary, that were soon after corrected.
+
+
+## 9. Conclusions and future work
 
 ### 9.1 Conclusions
 
