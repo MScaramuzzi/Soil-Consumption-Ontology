@@ -459,11 +459,11 @@ As it ca be seen, the reasoner correctly spotted the error, meaning that the pro
 
 ## 9. Conclusions and future work
 
-### 9.1 Conclusions
 
-* The data present in the csv files is not really comprehensive, thus the data  mapped from our ontology is not able to capture many of the classes we designed.
-  * In order to be able to extract more knowledge the project would need to start from a better source of data.
+The data present in the csv files is not really comprehensive, thus the data  mapped from our ontology is not able to capture many of the classes we designed.
 
-### 9.2 Future work
+Further works could include the usage of new key data, for example including also coordinates and geospacial features: that would enable us to make an effective use of the class Geometry. 
 
-...
+More generally, accessing bigger datasets would enable us to utilize our ontology in a more extensive way.
+Following the same thought process, the ontology could be used to represent other domains that share the same characteristics of the one we worked on.  
+
