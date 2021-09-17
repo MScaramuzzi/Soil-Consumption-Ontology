@@ -418,7 +418,7 @@ WHERE {?parameter a onto:Parameter}
 
 ## 9. Conclusions and future work
 
-assort
+
 
 ### 9.1 Conclusions
 
