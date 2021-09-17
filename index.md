@@ -100,7 +100,7 @@ In the following figure we present the knowledge graph that represents classes a
 <img src="image/soil-consumption-knowledge-graph.png
 " alt="hi"/>
 
-*Figure 1* - **Boh**
+*Figure 1* - **Graphical representation of our ontology**
 
 
 The two main classes in this graph are **:Indicator** and **:Place**. These two classes subtend the components we want to focus on our domain: measurements and geographical coordinates.
@@ -161,13 +161,13 @@ In total, this mapping counts **5032797 triples** triples and it was uploaded on
 
 ## 6. Deployment on Virtuoso - SPARQL Queries
 
-In this project we have employed Fuseki for publishing our data on a SPARQL endpoint. This choice was motivated by the ease of use of Fuseki.  We have loaded the data produced by the mapping (mapping_125.ttl) by using the User Interface provided by Fuseki.
+In this project we have employed Fuseki for publishing our data on a SPARQL endpoint. This choice was motivated by the ease of use of Fuseki.  We have loaded the data produced by the mapping (*caske.ttl*) by using the User Interface provided by Fuseki.
 
-The high variety of types of indicators of soil consumption which are associated to each Place (C1,..,C125)  makes the output file of the size of almost 1 GB because it stores 3780350 triples.
+The high variety of types of indicators of soil consumption which are associated to each Place (C1,..,C125)  makes the output file of the size almost 1.4 GB because it stores 5032797 triples.
 
+<img src="image/dataset.png" alt="hi" class="inline"/>
 
-<img src="image/triples in soil.png" alt="hi" class="inline"/>
-
+We have employed Fuseki in order to test queries on our local machine and subsequentially we have deployed it to a virtual machine on Virtuoso in order to make it available online.
 
 ## 7. Ontology alignment(LIMES)
 
