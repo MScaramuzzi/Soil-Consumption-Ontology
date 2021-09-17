@@ -1,0 +1,157 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix : <http://www.example.org/ns/r2rml#>.
+@prefix onto: <https://w3id.org/stlab/cascke/ontology/>.
+
+#https://w3id.org/stlab/cascke
+#http://w3id.org/stlab/cascke/ontology
+
+:PlacesTriplesMap
+ rml:logicalSource :PlaceSource ;
+  rr:subjectMap [
+      rr:template "https://w3id.org/stlab/cascke/data/place/{PLACE_CODE}";
+      rr:class onto:Place
+  ] ;
+
+ {% for parameter in parameters %}
+ rr:predicateObjectMap [
+ rr:predicate onto:isReferredBy;
+ rr:objectMap [
+ rr:parentTriplesMap :IndicatorValueTriplesMap{{parameter}} 
+      ]
+ ] ; 
+ {% endfor %}
+
+  rr:predicateObjectMap [
+  rr:predicate onto:hasName;
+  rr:objectMap [
+  rml:reference "PLACE_NAME";
+       ]
+  ] ;
+
+ rr:predicateObjectMap [
+ rr:predicate onto:hasCollection;
+ rr:objectMap [
+ rml:reference "COLLECTION";
+      ]
+ ] .
+
+
+ {% for parameter in parameters %}
+ :IndicatorValueTriplesMap{{parameter}} 
+ rml:logicalSource :PlaceSource ;
+ crml:condition "df['{{parameter}}'].notnull()";
+ rr:subjectMap [
+      rr:template "https://w3id.org/stlab/cascke/data/indicator-value/{ {{parameter}} }"; 
+      rr:class onto:IndicatorValue
+  ] ;
+ 
+ rr:predicateObjectMap [
+ rr:predicate onto:value;
+ rr:objectMap [
+ rml:reference "{{parameter}}";
+ rr:datatype xsd:float;
+      ]
+ ] . 
+
+
+{% endfor %}
+
+
+ 
+:MetricTriplesMap
+  rml:logicalSource :IndicatorSource ;
+  rr:subjectMap [
+  rr:template "https://w3id.org/stlab/cascke/data/metric/%eval:caps('{INDICATOR_METRIC}')%";
+    rr:class onto:Metric
+
+  ] ;
+
+ rr:predicateObjectMap [
+ rr:predicate rdfs:label;
+ rr:objectMap [
+ rml:reference "METRIC_LABEL";
+ rr:language "it"
+     ]
+ ];
+
+ rr:predicateObjectMap [
+ rr:predicate onto:hasAssociatedParameter;
+ rr:objectMap [
+ rml:reference "INDICATOR_PARAMETER";
+ rr:language "it"
+     ]
+ ].
+
+
+
+
+{% for parameter in parameters %}
+:IndicatorTriplesMap{{parameter}}
+  rml:logicalSource :PlaceSource ;
+  rr:subjectMap [
+  rr:template "https://w3id.org/stlab/cascke/data/indicator/{PLACE_CODE}_{{parameter}}";
+    rr:class onto:Indicator
+  ] ;
+
+  rr:predicateObjectMap [
+  rr:predicate onto:hasIndicatorValue;
+  rr:objectMap [
+  rml:reference "{{parameter}}";
+  rr:datatype xsd:float;
+    ]
+  ] ;
+
+  rr:predicateObjectMap [
+  rr:predicate onto:hasMetric;
+  rr:objectMap [
+  rr:template "https://w3id.org/stlab/cascke/{{parameter}}";
+  rr:termType rr:IRI
+    ]
+  ] ;
+
+ rr:predicateObjectMap [
+ rr:predicate onto:isMemberOf;
+ rr:objectMap [
+ rml:reference "COLLECTION";
+     ]
+ ].
+{% endfor %} 
+
+
+
+:ParameterTriplesMap
+  rml:logicalSource :IndicatorSource ;
+  rr:subjectMap [
+  rr:template "https://w3id.org/stlab/cascke/data/parameter/{INDICATOR_PARAMETER}";
+    rr:class onto:Parameter
+
+  ] ;
+
+   rr:predicateObjectMap [
+ rr:predicate rdfs:label;
+ rr:objectMap [
+ rml:reference "INDICATOR_PARAMETER";
+ rr:language "it"
+     ]
+ ].
+
+
+
+
+ :PlaceSource rml:source "./soilc/Places_2012.csv"; #Places_2012 è un csv che ho ottenuto facendo il merge dei vari csv Regione_2012, Comune_2012 ecc
+  rml:referenceFormulation ql:CSV ;
+  rml:iterator ql:row ;
+  crml:separator ";" .
+
+ :IndicatorSource rml:source "./soilc/info.csv";
+  rml:referenceFormulation ql:CSV ;
+  rml:iterator ql:row ;
+  crml:separator ";" .
+
