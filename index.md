@@ -50,7 +50,15 @@ Clearly this kind of project has a broader grasp because it encompasses  differe
 
 ## 3. Analysis of the data
 
-The starting composition of the data was charactersized by four different csv tables, one for each administration unit (Nazione,Regione,Comune,Provincia), plus one additional csv table. The tables referred to the administration units contained data about the names and associated codes of each unit, along with 125 different indicators and their values. The other table contained information about the metrics and parameters referred to the indicators. It is important to underline the fact that there were two versions of the tables referred to the administration units, namely the version referred to the year 2012 and the one referred to the year 2015. Due to the lack of computational power, we preferred to utilize olny the data referred to the year 2012, in order to keep our dataset much lighter and workable. Another important note to take into account is the following: the design of the ontology started from this data, but we tried to generalize it, in order to make it as scalable as possible, so its use can be broader and directed also to other domains different from this one. An example of this methodology will be described in section 4.2. In order to make the process of RML mapping easier and faster, we merged the four tables into one big csv file, containing all informations about the different administration units.
+The initial form of the data was charactersized by four different *csv* tables, one for each administration unit (**Nazione**,**Regione**,**Comune**,**Provincia**), plus one additional csv table, that explained the meaning of the metrics and parameters regarding soil consumption.
+
+The four tables referred to the administration units contained data about the names and associated codes of each unit, along with **125** different **indicators** and their values.
+
+The other table contained information about the metrics and parameters referred to the indicators. It is important to underline the fact that there were two versions of the tables referred to the administration units, namely the version referred to the year 2012 and the one referred to the year 2015. Due to the lack of computational power, we preferred to utilize only the data referred to the year 2012, in order to keep our **dataset** much **lighter** and easy to work with. 
+
+Another important note to take into account is the following: the design of the ontology started from this data, but we tried to generalize it, in order to make it as scalable as possible, so its use can be broader and directed also to other domains different from this one. An example of this methodology will be described in section 4.2. 
+
+In order to make the process of RML mapping easier and faster, we merged the four tables into **one csv** file of considerable size, containing all informations about the different administration units.
 
 ## 4. Ontology
 
@@ -58,25 +66,25 @@ In the following section we provide the necessary steps we took in order to form
 
 ### 4.1 Design Methodology
 
-The main technique we used to develop the project was compliant with the norms and requirements of the eXtreme Design methodology. After analyzing the data that was provided to us we formulated various **Competency Questions** (CQs) that helped shape the ontology, followed by the application and usage of **Logical** and **Content** **Ontology Design Patterns** (ODPs) in order to overcome expressivity issues.
+The main technique we used to develop the project was compliant with the norms and requirements of the **eXtreme Design methodology**. After analyzing the data that was provided to us we formulated various **Competency Questions** (CQs) that helped shape the ontology, followed by the application and usage of **Logical** and **Content** **Ontology Design Patterns** (ODPs) in order to overcome expressivity issues.
 
 After testing and tuning various aspects of the ontology, we were finally able to complete it. The CQs we used for modelingin are represented in  *Table 1*.
 
 
 | ID  | Competency Question                  |
 |-----|--------------------------------------|
-| CQ1 | Which Place is referred by a certain IndicatorValue?     |
+| CQ1 |    What does a metric X define?  |
 | CQ2 | What is the name of the place with code X? |
 | CQ3 | What are the collections associated to all the places? |
 | CQ4 | What are the collections associated to a specific place named X ?  |
 | CQ5 | What is the value of an indicatorValue X? |
 | CQ6 | To which collection does an indicatorValue X belong? |
 | CQ7 | What are the metrics for the indicators?  |
-| CQ8 | What does a metric X define?  |
+| CQ8 |Which Place is referred by a certain IndicatorValue?   |
 | CQ9 | What parameter is the metric X associated to?  |
 | CQ10 | What are the indicators?  |
 | CQ11 | What metric does an indicator have? |
-| CQ12 | Which are the parameters? |
+| CQ12 | What are the parameters? |
 | CQ13 | What the  metrics and parameters associated to the indicator X? |
 | CQ14 | What the  metrics and parameters associated to the indicator X? |
 
@@ -92,25 +100,24 @@ In the following figure we present the knowledge graph that represents classes a
 <img src="image/soil-consumption-knowledge-graph.png
 " alt="hi"/>
 
-Figure 1 - **Knowledge Graph** DA CAMBIARE
+*Figure 1* - **Boh**
 
 
 The two main classes in this graph are **:Indicator** and **:Place**. These two classes subtend the components we want to focus on our domain: measurements and geographical coordinates.
 
-Starting from the latter of the two, we have the **:Place** class, characterized by two main subclasses named  **:Geometry**, which is the first eaxmple of the generalization of the ontolgy (as this particular kind of data is not present) and **:AdministrationUnit**. The latter has four subclasses represented by **:Nazione**, **:Regione**, **:Provincia**, **:Comune** (characterized by a hierarchical feature, determined by the **Logical ODP Transitive Reduction**. In particular, it is defined with two properties **:contains** and **:containsDirectly**, the former being transitive).
+Starting from the latter of the two, we have the **:Place** class, characterized by two main subclasses named  **:Geometry**, which is the first example of the generalization of the ontolgy (as this particular kind of data is not present) and **:AdministrationUnit**. The latter has four subclasses represented by **:Nazione**, **:Regione**, **:Provincia**, **:Comune** (characterized by a hierarchical feature, determined by the **Logical ODP Transitive Reduction**. In particular, it is defined with two properties **:contains** and **:containsDirectly**, the former being transitive).
 
 A **:PlaceCode** is associated to a **:Place**, and it can be released by any **:Organization** based on the country (ISTAT for Italy), this class was modeled in such a general way in order to make it independent of the country in which the ontology can be deployed on. An important feature of **:Place** is found in its **:Geometry**, which is a broader definition used to describe its geographical features which can vary from latitude and longitude to being a centroid, the specific implementation of this depends on how the **wkt:geometry** is defined.
 
-To each **:Place** are linked one or more (existential) **:Collection** of **:Indicator**. Here it possible to witness the use of one **Content ODP**, used to link the two classes mentioned above, by the object properties **:hasMember** and **:isMemberOf** which are the **inverse** of one another.
+To each **:Place** are linked one or more  **:Collection** of **:Indicator**. Here it possible to witness the use of one **Content ODP**, used to link the two classes mentioned above, by the object properties **:hasMember** and **:isMemberOf** which are the **inverse** of one another.
 
-**:Indicator** itself is an application of the **N-ary relation** pattern. The rationale behind this choice is that we needed to model a process that involved many classes at the same time. Any entity of **:Indicator** is provided with a **:atTime** relation, connected to a **:TimeEntity** that could be either an **:Instant** or a time **:Interval**, where another **Content ODP** is used. This design choice was made because we wanted to generalize the concept of time related to a particular indicator, even if the data we used did not include this feature. 
+**:Indicator** itself is an application of the **N-ary relation** pattern. The rationale behind this choice is that we needed to model a process that involved many classes at the same time. Any entity of **:Indicator** is provided with a **:atTime** relation, connected to a **:TimeEntity** that could be either an **:Instant** or a time **:Interval**, which is another instantiation of a **Content ODP**. This design choice was made because we wanted to generalize the concept of time related to a particular indicator, even if the available data did not include this feature.
 
 An indicator is provided with a **:Metric** that represents the general type of measure an indicator is associated with, like soil consumption, non-classified soil, inhabitants for hectare and its relative unit of measure (could be hectares, percentage, square meters etc.). Something to be taken into account is that these relation are modelled after the **Observation Content Pattern**. 
 
 The **:hasAssociatedParameter** relation is necessary to equip a **:Metric** with the particular task it is used for, providing further information on what it is describing (e.g. soil consumed at 150 meters from coastal borders) , thus enabling to instantiate it to any application of the ontology by whomever aims to reuse it.
 
-Lastly, an indicator has :IndicatorValue, which itself is connected with a **:UnitOfMeasure**. There is a distinction to be made between **:Metric** and **:UnitOfMeasure** the former represents the general metric associated with an indicator, while the latter represents the particular unit of measure of the value which may be  a multiple or a submultiple of the metric associated with the indicator (if **:Metric** is meters, **:UnitOfMeasure** can be centimeter, kilometers etc.). This again, was done in order to provide reusability to the ontology: some applications in very different domains may need different magnitude of a unit of measures.
-
+Lastly, an indicator has **:IndicatorValue**, which itself is connected with a **:UnitOfMeasure**. There is a distinction to be made between **:Metric** and **:UnitOfMeasure** the former represents the general metric associated with an indicator, while the latter represents the particular unit of measure of the value which may be  a multiple or a submultiple of the metric associated with the indicator (e.g. if **:Metric** is meters, **:UnitOfMeasure** can be centimeter, kilometers etc.). This again, was done in order to provide reusability to the ontology: some applications in very different domains may need different magnitude of a unit of measures.
 
 ## 5. Mapping rules and ontology publication(RML)
 
@@ -118,7 +125,7 @@ In order to proceed for this step, the use of the pyRML python engine developed 
 
 The process of knowledge extraction started from the study and comprehension of the data we wanted to map: the data itself was composed of various csv tables we got directly from the ISPRA soil consumption web page.
 
-After understanding what kind of information these tables bore, the first step was to merge all the tables regarding the places (region, municipality, etc.) and the relative indicator values (from C1 to C125), resulting in a large **8177x127** csv file called **Places.csv**. 
+After understanding what kind of information these tables bore, the first step was to merge all the tables regarding the places (region, municipality, etc.) and the relative indicator values (from C1 to C125), resulting in a large **8177x127** csv file called **Places.csv**.
 
 The other table we used for mapping the data was the one that contained information about the indicator metrics and parameters, called **Info.csv**. In the making of these resulting tables, processes of data cleaning were also utilized. The mapping itself consists in a RML file developed in Turtle syntax, which involves five subject maps (and other object maps), used to map Places, Metrics, Indicator Values, Indicators and Parameters.
 
@@ -147,7 +154,9 @@ An example of a triple for this kind of mapping could be the following:
 <https://w3id.org/stlab/cascke/data/indicator/45010_C2> <https://w3id.org/stlab/cascke/ontology/hasMetric> 
 <https://w3id.org/stlab/cascke/C2>.
 
-This particular set of triples would be describing an indicator associated to the Municipality of Fabriano and its relative metric C2 that corresponds to non-consumed soil. In total, this mapping counts **3780350** triples and it was uploaded on w3id of of STlab.
+This particular set of triples would be describing an indicator associated to the Municipality of Fabriano and its relative metric C2 that corresponds to non-consumed soil. 
+
+In total, this mapping counts **5032797 triples** triples and it was uploaded on the IRI W3ID namespace provided by STlab.
 
 
 ## 6. Deployment on Virtuoso - SPARQL Queries
@@ -261,13 +270,15 @@ From this we can infer that there are some redundancies in the ontologies aligne
 ## 8. Testing of the ontology
 
 The testing part of this project was divided in three steps:
-1.**CQ Verification**  
+1.**CQs Verification**  
 2. **Inference Verification**
 3. **Error Provocation**
 
-### 8.1 SPARQL queries
 
-Now we are going to implement some of the CQs as SPARQL queries
+
+### 8.1 CQs through SPARQL queries
+
+CQs verification consists in testing whether the ontology vocabulary allows to convert a CQs to a SPARQL query. Thanks to this kind of testing we denoted some flaws in our data and vocabulary, that were soon after corrected.
 
 
 #### 8.1.1 CQ1: What are the collections associated to a specific place named X?
@@ -279,7 +290,7 @@ WHERE {?metric a onto:Metric;
 ```
 
 
-<img src="image/CQ8.png" alt="hi" class="inline"/>
+<img src="image/CQ1.png" alt="hi" class="inline"/>
 
 
 
@@ -356,7 +367,7 @@ LIMIT 1000
 
 
 
-<img src="image/CQ1.png" alt="hi" class="inline"/>
+<img src="image/CQ8.png" alt="hi" class="inline"/>
 
 
 In order to see every indicator value associated to every place the query would be the following. LIMIT keyward was needed due to the size of the output, which would take a lot of time to compute.
@@ -379,8 +390,7 @@ WHERE { ?placeCode  a onto:Place;
 LIMIT 1000
 ```
 
-<img src="image/CQ1bis.png" alt="hi" class="inline"/>
-
+<img src="image/CQ8bis.png" alt="hi" class="inline"/>
 
 
 
@@ -395,18 +405,8 @@ WHERE {?metric a onto:Metric;
 <img src="image/CQ9.png" alt="hi" class="inline"/>
 
 
-#### 8.1.4 CQ9: What are the collections associated to a specific place named X?
 
-```SPARQL
-SELECT  ?metric ?parameter
-WHERE {?metric a onto:Metric;
-                               onto:hasAssociatedParameter ?parameter}
-```
-
-<img src="image/CQ9.png" alt="hi" class="inline"/>
-
-
-#### 8.1.4 CQ11: Fill XXX
+#### 8.1.5 CQ11: What metric does an indicator have?
 
 ```SPARQL
 SELECT  ?indicator ?metric
@@ -417,7 +417,7 @@ WHERE {?indicator a onto:Indicator;
 <img src="image/CQ11.png" alt="hi" class="inline"/>
 
 
-#### 8.1.4 CQ12: Fill XXX
+#### 8.1.6 CQ12: What are the parameters?
 
 ```SPARQL
 SELECT  ?parameter
@@ -432,9 +432,9 @@ WHERE {?parameter a onto:Parameter}
 
 During the development of the ontology on Protégé we checked the consistency of our project by running on of the reasoners provided by the desktop app, in our case it was HermiT 1.4.3.
 
+<img src="image/run_reasoner.png" alt="hi" class="inline"/>
 
-**immagine reasoner**
-
+*Figure x* - **Output generated by executing of the reasoner**
 
  Whenever it revealed any inconsistency we corrected it, in order to make our ontology consistent.
 
@@ -452,8 +452,9 @@ Figure x - **Error provocation test**
 
 As it ca be seen, the reasoner correctly spotted the error, meaning that the proper disjointess axiom was implemented.
 
-CQ Verification:
-CQ verification consists in testing whether the ontology vocabulary allows to convert a CQ to a SPARQL query. Thanks to this kind of testing we denoted some flaws in our data and vocabulary, that were soon after corrected.
+
+
+<img src="image/metrics.png" alt="hi" class="inline"/>
 
 
 ## 9. Conclusions and future work
