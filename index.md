@@ -9,6 +9,7 @@ Link to the folders containing relevant files:
  * [Github repository](https://github.com/MScaramuzzi/Soil-Consumption-Ontology)
    * Knowledge Graph
    * Mapping RML file
+   * Ouput of Limes mapping 
 
 ## Abstract
 
