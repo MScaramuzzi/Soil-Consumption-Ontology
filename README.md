@@ -18,4 +18,4 @@
 
 * **soilc.zip**: Csv data regarding soil consumption
   
-* LIMES:
+* **LIMES folder**: Contains the accept.nt file which consists of the triples generated from the output of the alignment process made through LIMES.
