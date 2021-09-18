@@ -63,7 +63,7 @@ The initial form of the data was charactersized by four different *csv* tables, 
 
 The four tables referred to the administration units contained data about the names and associated codes of each unit, along with **125** different **indicators** and their values.
 
-The other table contained information about the metrics and parameters referred to the indicators. It is important to underline the fact that there were two versions of the tables referred to the administration units, namely the version referred to the year 2012 and the one referred to the year 2015. Due to the lack of computational power, we preferred to utilize only the data referred to the year 2012, in order to keep our **dataset** much **lighter** and easy to work with. 
+The other table contained information about the metrics and parameters referred to the indicators. It is important to underline the fact that there were two versions of the tables referred to the administration units, namely the version referred to the year 2012 and the one referred to the year 2015. Due to the lack of computational power at our disposal, we preferred to utilize only the data referred to the year 2012, in order to keep our **dataset** much **lighter** and easy to work with.
 
 Another important note to take into account is the following: the design of the ontology started from this data, but we tried to generalize it, in order to make it as scalable as possible, so its use can be broader and directed also to other domains different from this one. An example of this methodology will be described in section 4.2.
 
@@ -94,10 +94,9 @@ After testing and tuning various aspects of the ontology, we were finally able t
 | CQ10 | What are the indicators?  |
 | CQ11 | What metric does an indicator have? |
 | CQ12 | What are the parameters? |
-| CQ13 | What the  metrics and parameters associated to the indicator X? |
-| CQ14 | What the  metrics and parameters associated to the indicator X? |
 
- *Table 1* - **Competency Questions used for modeling the ontology**
+
+ *Table 4.1* - **Competency Questions used for modeling the ontology**
 
 We were able to extrapolate a **snapshot** of the **domain** of **knowledge** described in our ontology by analyzing these CQs and we used it to generate our classes in a way that matched a precise description of the domain. We aimed to make explicit the semantic connections between the various entities that populate this domain and to represent the intrinsic meaning that these entities underlie.
 
@@ -109,7 +108,7 @@ In the following figure we present the knowledge graph that represents classes a
 <img src="image/soil-consumption-knowledge-graph.png
 " alt="hi"/>
 
-*Figure 1* - **Graphical representation of our ontology**
+*Figure 4.1* - **Graphical representation of our ontology**
 
 
 The two main classes in this graph are **:Indicator** and **:Place**. These two classes subtend the components we want to focus on our domain: measurements and geographical coordinates.
@@ -148,12 +147,12 @@ The following is an extract of the RML, specifically the part relative to the tr
  
 <img src="image/rml.png" alt="hi" class="inline"/>
 
-*Figure 2* - **Code for RML extraction of data**
+*Figure 5.2* - **Code for RML extraction of data**
 
 
-In this figure, other than the already mentioned python function injection that opens at line 100 and closes at line 115 denoted by the curly brackets, it possible to notice how the class of the indicators was mapped.
+In this figure, other than the already mentioned python function injection that opens at line 95 and closes at line 125 denoted by the curly brackets, it possible to notice how the class of the indicators was mapped.
 
-At line 104, we defined the template in such way that it contained both the place code and the parameter relative to the single indicator. By committing to this design choice the result is that a single indicator is defined by the place it is associated to and its metric code.
+At line 99, we defined the template in such way that it contained both the place code and the parameter relative to the single indicator. By committing to this design choice the result is that a single indicator is defined by the place it is associated to and its metric code.
 
 An example of a triple for this kind of mapping could be the following:
 
@@ -168,7 +167,7 @@ This particular set of triples would be describing an indicator associated to th
 In total, this mapping counts **5032797 triples** triples and it was uploaded on the IRI W3ID namespace provided by STlab.
 
 
-## 6. Deployment on Virtuoso - SPARQL Queries
+## 6. Deployment of the data 
 
 In this project we have employed Fuseki for publishing our data on a SPARQL endpoint. This choice was motivated by the ease of use of Fuseki.  We have loaded the data produced by the mapping (*caske.ttl*) by using the User Interface provided by Fuseki.
 
@@ -189,7 +188,8 @@ Still, it has been possible to align the class **:Place** with the equivalent cl
 
 We have actually opted to align the class **:PopulatedPlace** which reduces the number of instances to look for in DBpedia, this has been done in order to **reduce** the computation **time** of the alignment which would have been incredibly lengthy.
 
-We have realized the alignment by exploiting **LIMES**, a command line tool that can be configured through an XML file. It is possible to insert the information needed for the alignment by tuning some of the tags in the configuration file of LIMES, which we called **file.xml**.
+We have realized the alignment by exploiting **LIMES**, a command line tool that can be configured through an XML file. It is possible to insert the information needed for the alignment by tuning some of the tags in the configuration file of LIMES, which we have called **pom1.xml**.
+
 
 In this document we specify the endpoint SPARQL of the **SOURCE** (Soil Consumption Ontology) and the **TARGET** (DBpedia) ontology. In this case the two are:
 
@@ -280,7 +280,7 @@ From this we can infer that there are some redundancies in the ontologies aligne
 
 The testing part of this project was divided in three steps:
 
-1.**CQs Verification**  
+1. **CQs Verification**  
 2. **Inference Verification**
 3. **Error Provocation**
 
@@ -373,8 +373,6 @@ ORDER BY ?place
 LIMIT 1000  
 ```
 
-
-
 <img src="image/CQ8.png" alt="hi" class="inline"/>
 
 
@@ -400,9 +398,11 @@ LIMIT 1000
 
 <img src="image/CQ8bis.png" alt="hi" class="inline"/>
 
+*Figure x* - **Output generated by executing of the reasoner**
 
 
-#### 8.1.4 CQ9: What are the collections associated to a specific place named X?
+
+#### 8.1.4 CQ9: What are the parameter associated to a metric X?
 
 ```SPARQL
 SELECT  ?metric ?parameter
@@ -410,9 +410,12 @@ WHERE {?metric a onto:Metric;
                                onto:hasAssociatedParameter ?parameter}
 ```
 
+*Figure x* - **Output generated by executing of the reasoner**
+
+
 <img src="image/CQ9.png" alt="hi" class="inline"/>
 
-
+Here we can see what a specific metric is defining trough its associated parameter.
 
 #### 8.1.5 CQ11: What metric does an indicator have?
 
@@ -422,8 +425,11 @@ WHERE {?indicator a onto:Indicator;
                                    onto:hasMetric ?metric}
 ```
 
+*Figure x* - **Output generated by executing of the reasoner**
+
 <img src="image/CQ11.png" alt="hi" class="inline"/>
 
+By looking at a certain indicator, we might want to know what is it representing, and we can do that by displaying the relative metric label. If we wanted even more information, we could associate the parameter of the metric.
 
 #### 8.1.6 CQ12: What are the parameters?
 
@@ -434,7 +440,10 @@ WHERE {?parameter a onto:Parameter}
 
 <img src="image/CQ12.png" alt="hi" class="inline"/>
 
+*Figure x* - **Output generated by executing of the reasoner**
 
+
+Displaying all the possible parameters.
 
 #### 8.2 Inference Verification
 
@@ -444,7 +453,7 @@ During the development of the ontology on Protégé we checked the consistency o
 
 *Figure x* - **Output generated by executing of the reasoner**
 
- Whenever it revealed any inconsistency we corrected it, in order to make our ontology consistent.
+Whenever it revealed any inconsistency we corrected it, in order to make our ontology consistent.
 
 
 ### 8.3 Error Provocation
@@ -452,25 +461,24 @@ During the development of the ontology on Protégé we checked the consistency o
 Another important part of the testing process is to verify that any purposely wrong input in the ontology is correctly discovered. This is done also in Protegè, by creating an individual that does not follow the rules or axioms of the ontology. As an example, we tried to give as an input an individual that had all the characteristics of an Indicator, but marked it as a Parameter. When running HermiT, the flaw was correctly spotted.
 
 
-Figure x - **Error provocation test** 
+*Figure x* - **Error provocation test** 
 
 <img src="image/err_prov.png" alt="hi" class="inline"/>
 
 
-
 As it ca be seen, the reasoner correctly spotted the error, meaning that the proper disjointess axiom was implemented.
 
-
+Dispayed here are the characteristics of the final ontology.
 
 <img src="image/metrics.png" alt="hi" class="inline"/>
 
+Metti commento metrics
 
 ## 9. Conclusions and future work
 
-
 The data present in the csv files is not really comprehensive, thus the data  mapped from our ontology is not able to capture many of the classes we designed.
 
-Further works could include the usage of new key data, for example including also coordinates and geospacial features: that would enable us to make an effective use of the class Geometry. 
+Further works could include the usage of new key data, for example including also coordinates and geospacial features: that would enable us to make an effective use of the class **Geometry**.
 
 More generally, accessing bigger datasets would enable us to utilize our ontology in a more extensive way.
 Following the same thought process, the ontology could be used to represent other domains that share the same characteristics of the one we worked on.  
